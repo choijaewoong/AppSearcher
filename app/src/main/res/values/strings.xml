@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppSearcher</string>
+    <string name="app_search">App Search</string>
+    <string name="action_search">Search</string>
 </resources>

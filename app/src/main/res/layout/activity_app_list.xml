@@ -2,16 +2,17 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="300dp"
+    android:layout_width="@dimen/dimen_app_list_activity_size"
+    android:layout_height="@dimen/dimen_app_list_activity_size"
     tools:context=".AppListActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
+        android:layout_margin="@dimen/dimen_small_default"
+        android:background="@color/colorToolbarMint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_toolbar_height"
         android:layout_alignParentTop="true"
-        android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
+        android:elevation="@dimen/dimen_default_elevation"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
     <FrameLayout
         android:id="@+id/fragmentContainer"

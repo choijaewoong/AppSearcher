@@ -22,8 +22,10 @@ public class AppListActivity extends AppCompatActivity {
         // Setting Toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_search);
-        toolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorFont));
+        toolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorBackground));
         setSupportActionBar(toolbar);
+
+        // Create Fragment
 
     }
 

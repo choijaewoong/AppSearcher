@@ -1,6 +1,7 @@
 package com.example.androidchoi.appsearcher;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,9 +27,14 @@ public class AppListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Create Fragment
-
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+        if(fragment == null){
+            fragment = new AppListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragmentContainer, fragment)
+                    .commit();
+        }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.app_search, menu);

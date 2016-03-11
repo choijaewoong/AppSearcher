@@ -4,9 +4,11 @@
              android:layout_height="match_parent"
              tools:context="com.example.androidchoi.appsearcher.AppListFragment">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView"
-        android:layout_gravity="left|top"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/recylerView_appList"
+        android:paddingTop="@dimen/dimen_min_default"
+        android:paddingBottom="@dimen/dimen_min_default"
+        android:clipToPadding="false"/>
 </FrameLayout>

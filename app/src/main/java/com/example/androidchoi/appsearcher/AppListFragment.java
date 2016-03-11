@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Model.AppData;
 
@@ -49,7 +48,7 @@ public class AppListFragment extends Fragment {
         // AppData 객체 리스트 세팅
         List<AppData> appList = new ArrayList<>();
         for(ResolveInfo ri : riList){
-            AppData appData = new AppData(ri.loadLabel(pm).toString(), ri.loadIcon(pm));
+            AppData appData = new AppData(ri, pm);
             appList.add(appData);
         }
 
@@ -67,13 +66,20 @@ public class AppListFragment extends Fragment {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recylerView_appList);
         mAdapter = new AppListAdapter();
         mAdapter.setItems(appList);
+        // item 클릭시 해당 앱 실행
+
         mAdapter.setOnItemClickListener(new AppItemViewHolder.OnItemClickListener() {
             @Override
-            public void onItemClick(String name, int position) {
-                Toast.makeText(getActivity(), "name : " + name, Toast.LENGTH_SHORT).show();
+            public void onItemClick(String packageName, String activityName, int position) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName(packageName, activityName);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+//                Toast.makeText(getActivity(), "packagename : " + packageName + "/ activityname : " + activityName, Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+        // Vertical RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
 

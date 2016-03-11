@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Model.AppData;
 
@@ -43,11 +44,11 @@ public class AppListFragment extends Fragment {
 
         // appList를 가져오기 위한 PackageManager 객체 생성
         final PackageManager pm = getActivity().getPackageManager();
-//        List<ResolveInfo> appList = pm.queryIntentActivities(intent, 0);
+        List<ResolveInfo> riList = pm.queryIntentActivities(intent, 0);
 
-        // AppData 객체 리스트
+        // AppData 객체 리스트 세팅
         List<AppData> appList = new ArrayList<>();
-        for(ResolveInfo ri : pm.queryIntentActivities(intent, 0)){
+        for(ResolveInfo ri : riList){
             AppData appData = new AppData(ri.loadLabel(pm).toString(), ri.loadIcon(pm));
             appList.add(appData);
         }
@@ -62,27 +63,20 @@ public class AppListFragment extends Fragment {
             }
         });
 
-        //  appList 출력하는 리스트뷰 구현
-//        ListView listView = (ListView)view.findViewById(R.id.listView);
-//        listView.setAdapter(new ArrayAdapter<ResolveInfo>(getActivity(), android.R.layout.simple_list_item_1,
-//                appList){
-//            @Override
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                View view = super.getView(position, convertView, parent);
-//                TextView tv = (TextView)view;
-//                ResolveInfo ri = getItem(position);
-//                tv.setText(ri.loadLabel(pm));
-//                return view;
-//            }
-//        });
-
-        // appList 출력하는 RecyclerView 구현
+        // appList를 이용하여 RecyclerView , AppListAdapter 세팅
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recylerView_appList);
         mAdapter = new AppListAdapter();
         mAdapter.setItems(appList);
+        mAdapter.setOnItemClickListener(new AppItemViewHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(String name, int position) {
+                Toast.makeText(getActivity(), "name : " + name, Toast.LENGTH_SHORT).show();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
+
         return view;
     }
 

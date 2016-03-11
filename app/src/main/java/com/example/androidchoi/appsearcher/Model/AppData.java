@@ -17,16 +17,7 @@ public class AppData {
     public String getName() {
         return mName;
     }
-
-    public void setName(String name) {
-        mName = name;
-    }
-
     public Drawable getImage() {
         return mImage;
-    }
-
-    public void setImage(Drawable image) {
-        mImage = image;
     }
 }

@@ -12,6 +12,15 @@ import com.example.androidchoi.appsearcher.Model.AppData;
  */
 public class AppItemViewHolder extends RecyclerView.ViewHolder {
 
+    public interface OnItemClickListener {
+        public void onItemClick(String name, int position);
+    }
+    OnItemClickListener mListener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+
     TextView textAppName;
     ImageView imageAppImage;
 
@@ -19,6 +28,15 @@ public class AppItemViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         textAppName = (TextView)itemView.findViewById(R.id.text_app_name);
         imageAppImage = (ImageView)itemView.findViewById(R.id.image_app_logo);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                if (mListener != null && position != RecyclerView.NO_POSITION) {
+                    mListener.onItemClick(textAppName.getText().toString(), position);
+                }
+            }
+        });
     }
 
     public void setItems(AppData appData) {

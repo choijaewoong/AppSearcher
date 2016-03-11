@@ -12,7 +12,8 @@
         android:layout_marginLeft="@dimen/dimen_default"
         android:layout_marginRight="@dimen/dimen_default"
         android:layout_marginTop="@dimen/dimen_min_default"
-        android:layout_marginBottom="@dimen/dimen_min_default">
+        android:layout_marginBottom="@dimen/dimen_min_default"
+        android:foreground="?android:attr/selectableItemBackground">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -17,6 +17,11 @@ public class AppListAdapter extends RecyclerView.Adapter<AppItemViewHolder> {
 
     List<AppData> mItems = new ArrayList<>();
 
+    AppItemViewHolder.OnItemClickListener mItemClickListener;
+    public void setOnItemClickListener(AppItemViewHolder.OnItemClickListener listener) {
+        mItemClickListener = listener;
+    }
+
     // 어댑터에 AppList item 추가하는 메소드
     public void setItems(List<AppData> items){
         mItems = items;
@@ -32,6 +37,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppItemViewHolder> {
     @Override
     public void onBindViewHolder(AppItemViewHolder holder, int position) {
         holder.setItems(mItems.get(position));
+        holder.setOnItemClickListener(mItemClickListener);
     }
 
     @Override

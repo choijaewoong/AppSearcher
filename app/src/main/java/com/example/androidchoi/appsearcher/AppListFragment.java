@@ -1,13 +1,17 @@
 package com.example.androidchoi.appsearcher;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +23,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static java.sql.DriverManager.println;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AppListFragment extends Fragment {
+
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase db;
 
     RecyclerView mRecyclerView;
     AppListAdapter mAdapter;
@@ -31,6 +40,16 @@ public class AppListFragment extends Fragment {
     public AppListFragment() {
         // Required empty public constructor
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        dbHelper = new DatabaseHelper(getActivity());
+
+        //insert appList in Database
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -86,6 +105,58 @@ public class AppListFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
 
         return view;
+    }
+
+    // Insert Data
+    public void insert(String name, String packageName, String activityName){
+        db = dbHelper.getWritableDatabase(); // 쓰기 가능하도록 db 객체 불러오기
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_NAME, name);
+        values.put(DatabaseHelper.COLUMN_PACKAGE_NAME, packageName);
+        values.put(DatabaseHelper.COLUMN_ACTIVITY_NAME, activityName);
+        db.insert(DatabaseHelper.TABLE_NAME, null, values);
+    }
+
+    // Update Data
+    public void update(String name, String packageName, String activityName){
+        db = dbHelper.getWritableDatabase(); // 쓰기 가능하도록 db 객체 불러오기
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_NAME, name);
+        values.put(DatabaseHelper.COLUMN_PACKAGE_NAME, packageName);
+        values.put(DatabaseHelper.COLUMN_ACTIVITY_NAME, activityName);
+        db.update(DatabaseHelper.TABLE_NAME, values, DatabaseHelper.COLUMN_NAME + "=?", new String[]{name});
+    }
+
+    // Delete Data
+    public void delete(String name){
+        db = dbHelper.getWritableDatabase(); // 쓰기 가능하도록 db 객체 불러오기
+        db.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper.COLUMN_NAME + "=?", new String[]{name});
+        Log.i("db", name + "is deleted.");
+    }
+
+    public void select(){
+        String[] columns = {DatabaseHelper.COLUMN_NAME
+                            ,DatabaseHelper.COLUMN_PACKAGE_NAME
+                            ,DatabaseHelper.COLUMN_ACTIVITY_NAME};
+        String whereStr = "name = ?";
+        String[] whereParams = {"CLiP"};
+
+//        Cursor c = db.query(DatabaseHelper.TABLE_NAME, columns,
+//                whereStr, whereParams, null, null, null);
+        Cursor c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
+
+        int recordCount = c.getCount();
+        println("cursor count : " + recordCount + "\n");
+
+        while(c.moveToNext()){
+            int _id = c.getInt(c.getColumnIndex("_id"));
+            String name = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_NAME));
+            String packageName = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_PACKAGE_NAME));
+            String activityName = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_ACTIVITY_NAME));
+            Log.i("db : ", + _id + ", name : " + name + ", package : " + packageName
+                    + ", activity : " + activityName);
+        }
     }
 
 

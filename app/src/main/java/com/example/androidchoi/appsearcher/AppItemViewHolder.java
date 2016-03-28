@@ -1,5 +1,6 @@
 package com.example.androidchoi.appsearcher;
 
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,5 +45,11 @@ public class AppItemViewHolder extends RecyclerView.ViewHolder {
         imageAppImage.setImageDrawable(appData.getImage());
         packageName = appData.getPackageName();
         activityName = appData.getActivityName();
+    }
+    public void bindData(final Cursor cursor){
+        String name = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_NAME));
+        textAppName.setText(name);
+        packageName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PACKAGE_NAME));
+        activityName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_ACTIVITY_NAME));
     }
 }

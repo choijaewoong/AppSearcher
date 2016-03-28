@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import static java.sql.DriverManager.println;
-
 /**
  * Created by Choi on 2016-03-12.
  */
@@ -30,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        println("creating table ["+ TABLE_NAME + "].");
+        Log.i("db", "creating table ["+ TABLE_NAME + "].");
         try {
             String DROP_SQL = "drop table if exists " + TABLE_NAME;
             db.execSQL(DROP_SQL);
@@ -68,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onOpen(SQLiteDatabase db) {
-        println("opened database [" + DATABASE_NAME + "].");
+        Log.i("db","opened database [" + DATABASE_NAME + "].");
     }
 
 }

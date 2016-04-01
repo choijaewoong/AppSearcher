@@ -1,6 +1,8 @@
 package com.example.androidchoi.appsearcher;
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -41,14 +43,22 @@ public class AppItemViewHolder extends RecyclerView.ViewHolder {
         });
     }
     public void setItems(AppData appData) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(
+                appData.getImage(), 0,
+                appData.getImage().length);
+
         textAppName.setText(appData.getName());
-        imageAppImage.setImageDrawable(appData.getImage());
+        imageAppImage.setImageBitmap(bitmap);
+//        imageAppImage.setImageDrawable(appData.getImage());
         packageName = appData.getPackageName();
         activityName = appData.getActivityName();
     }
     public void bindData(final Cursor cursor){
         String name = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_NAME));
         textAppName.setText(name);
+        byte[] byteImage = cursor.getBlob(cursor.getColumnIndex(DatabaseHelper.COLUMN_IMAGE));
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
+        imageAppImage.setImageBitmap(bitmap);
         packageName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PACKAGE_NAME));
         activityName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_ACTIVITY_NAME));
     }

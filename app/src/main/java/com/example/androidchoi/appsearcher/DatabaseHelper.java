@@ -16,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TAG = "DatabaseHelper";
 
     public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_IMAGE = "app_logo";
     public static final String COLUMN_PACKAGE_NAME = "package_name";
     public static final String COLUMN_ACTIVITY_NAME = "activity_name";
 
@@ -39,6 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_SQL = "create table " + TABLE_NAME + "("
                 + " _id integer PRIMARY KEY autoincrement, "
                 + COLUMN_NAME + ", "
+                + COLUMN_IMAGE + " BLOB, "
                 + COLUMN_PACKAGE_NAME + ", "
                 + COLUMN_ACTIVITY_NAME + ")";
         try {

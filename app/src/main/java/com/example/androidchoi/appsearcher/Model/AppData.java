@@ -2,7 +2,11 @@ package com.example.androidchoi.appsearcher.Model;
 
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by Choi on 2016-03-11.
@@ -10,30 +14,32 @@ import android.graphics.drawable.Drawable;
 public class AppData {
 
     private String mName;
-    private Drawable mImage;
+    private byte[] mImageInByte;
     private String mPackageName;
     private String mActivityName;
 
     public AppData(ResolveInfo ri, PackageManager pm) {
         mName = ri.loadLabel(pm).toString();
-        mImage = ri.loadIcon(pm);
+        Drawable drawable = ri.loadIcon(pm);
+        BitmapDrawable bitmapDrawable = ((BitmapDrawable)drawable);
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        mImageInByte = stream.toByteArray();
         mPackageName = ri.activityInfo.packageName;
         mActivityName = ri.activityInfo.name;
     }
-    public AppData(String name, Drawable image) {
-        mName = name;
-        mImage = image;
-    }
+//    public AppData(String name, Drawable image) {
+//        mName = name;
+//        mImage = image;
+//    }
     public String getName() {
         return mName;
     }
-    public Drawable getImage() {
-        return mImage;
+    public byte[] getImage() {
+        return mImageInByte;
     }
-    public String getPackageName() {
-        return mPackageName;
-    }
-
+    public String getPackageName() { return mPackageName; }
     public String getActivityName() {
         return mActivityName;
     }

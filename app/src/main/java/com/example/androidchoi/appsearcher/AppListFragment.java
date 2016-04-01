@@ -1,6 +1,7 @@
 package com.example.androidchoi.appsearcher;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Model.AppData;
 
@@ -56,7 +58,7 @@ public class AppListFragment extends Fragment{
         Cursor c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
         // db에 applist가 생성되지 않은 경우 applist insert
         if(c.getCount() == 0){
-            insertAppListInDB();
+            initAppList();
             c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
         }
         mAdapter = new AppListCursorAdapter(c);
@@ -66,11 +68,15 @@ public class AppListFragment extends Fragment{
             @Override
             public void onItemClick(String packageName, String activityName, int position) {
                 ((AppListActivity)getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.
-                //해당 App의 PackageName, activityName을 이용해 App 실행
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setClassName(packageName, activityName);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                try{
+                    //해당 App의 PackageName, activityName을 이용해 App 실행
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setClassName(packageName, activityName);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }catch(ActivityNotFoundException e){
+                    Toast.makeText(getActivity(),"존재하지 않는 Application 입니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -82,7 +88,7 @@ public class AppListFragment extends Fragment{
     }
 
     //Local DB에 appList data를 넣는 메소드
-    public void insertAppListInDB(){
+    public void initAppList(){
         //암시적 인텐트
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -108,28 +114,30 @@ public class AppListFragment extends Fragment{
             }
         });
         for(AppData appData : appList){
-            insert(appData.getName(), appData.getPackageName(), appData.getActivityName());
+            insert(appData);
         }
     }
 
     // Insert Data
-    public void insert(String name, String packageName, String activityName){
+    public void insert(AppData appData){
         db = dbHelper.getWritableDatabase(); // 쓰기 가능하도록 db 객체 불러오기
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_NAME, name);
-        values.put(DatabaseHelper.COLUMN_PACKAGE_NAME, packageName);
-        values.put(DatabaseHelper.COLUMN_ACTIVITY_NAME, activityName);
+        values.put(DatabaseHelper.COLUMN_NAME, appData.getName());
+        values.put(DatabaseHelper.COLUMN_IMAGE, appData.getImage());
+        values.put(DatabaseHelper.COLUMN_PACKAGE_NAME, appData.getPackageName());
+        values.put(DatabaseHelper.COLUMN_ACTIVITY_NAME, appData.getActivityName());
         db.insert(DatabaseHelper.TABLE_NAME, null, values);
     }
 
     // Update Data
-    public void update(String name, String packageName, String activityName){
+    public void update(AppData appData){
         db = dbHelper.getWritableDatabase(); // 쓰기 가능하도록 db 객체 불러오기
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_NAME, name);
-        values.put(DatabaseHelper.COLUMN_PACKAGE_NAME, packageName);
-        values.put(DatabaseHelper.COLUMN_ACTIVITY_NAME, activityName);
-        db.update(DatabaseHelper.TABLE_NAME, values, DatabaseHelper.COLUMN_NAME + "=?", new String[]{name});
+        values.put(DatabaseHelper.COLUMN_NAME, appData.getName());
+        values.put(DatabaseHelper.COLUMN_IMAGE, appData.getImage());
+        values.put(DatabaseHelper.COLUMN_PACKAGE_NAME, appData.getPackageName());
+        values.put(DatabaseHelper.COLUMN_ACTIVITY_NAME, appData.getActivityName());
+        db.update(DatabaseHelper.TABLE_NAME, values, DatabaseHelper.COLUMN_NAME + "=?", new String[]{appData.getName()});
     }
 
     // Delete Data

@@ -7,12 +7,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -29,9 +27,9 @@ public class AppListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_list);
 
-        // App 화면 크기 설정
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+//        // App 화면 크기 설정
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
 
         // Setting Toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);

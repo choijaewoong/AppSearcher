@@ -2,9 +2,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AppListActivity">
+    android:background="@color/colorBackground"
+    android:layout_width="@dimen/dimen_app_list_activity_width"
+    android:layout_height="@dimen/dimen_app_list_activity_height"
+    tools:context="com.example.androidchoi.appsearcher.AppWidgetActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_margin="@dimen/dimen_min_default"
@@ -20,4 +22,5 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar">
     </FrameLayout>
+
 </RelativeLayout>

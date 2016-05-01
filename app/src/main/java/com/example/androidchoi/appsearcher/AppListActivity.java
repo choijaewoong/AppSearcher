@@ -119,7 +119,7 @@ public class AppListActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 FragmentManager fm = getSupportFragmentManager();
                 AppListFragment fragment = (AppListFragment)fm.findFragmentById(R.id.fragmentContainer);
-                fragment.select(s.toString());
+                fragment.filteringAppList(s.toString());
             }
 
             @Override

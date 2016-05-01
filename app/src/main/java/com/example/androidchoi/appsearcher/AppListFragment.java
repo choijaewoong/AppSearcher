@@ -119,6 +119,12 @@ public class AppListFragment extends Fragment{
         }
     }
 
+    // 검색을 이용하여 App Filtering 하는 Method
+    public void filteringAppList(String str){
+        Cursor cursor = select(str);
+        mAdapter.changeCursor(cursor);
+    }
+
     // Insert Data
     public void insert(AppData appData){
         db = dbHelper.getWritableDatabase(); // 쓰기 가능하도록 db 객체 불러오기
@@ -151,10 +157,10 @@ public class AppListFragment extends Fragment{
     public void deleteAll(){
         db = dbHelper.getWritableDatabase(); // 쓰기 가능하도록 db 객체 불러오기
         db.delete(DatabaseHelper.TABLE_NAME, null, null);
-//        Log.i("db", name + "is deleted.");
+        Log.i("db", "All deleted.");
     }
 
-    public void select(String str){
+    public Cursor select(String str){
         db = dbHelper.getReadableDatabase(); // 읽기 가능하도록 db 객체 불러오기
         String[] columns = {"_id", DatabaseHelper.COLUMN_NAME,
                             DatabaseHelper.COLUMN_IMAGE,
@@ -165,16 +171,17 @@ public class AppListFragment extends Fragment{
         Cursor c = db.query(DatabaseHelper.TABLE_NAME, columns,
                 whereStr, whereParams, null, null, null);
 
-        int recordCount = c.getCount();
-        Log.i("cursor count : ", recordCount + "");
-
-        while(c.moveToNext()){
-            int _id = c.getInt(c.getColumnIndex("_id"));
-            String name = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_NAME));
-            String packageName = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_PACKAGE_NAME));
-            String activityName = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_ACTIVITY_NAME));
-            Log.i("db : ", + _id + ", name : " + name + ", package : " + packageName
-                    + ", activity : " + activityName);
-        }
+//        int recordCount = c.getCount();
+//        Log.i("cursor count : ", recordCount + "");
+//
+//        while(c.moveToNext()){
+//            int _id = c.getInt(c.getColumnIndex("_id"));
+//            String name = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_NAME));
+//            String packageName = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_PACKAGE_NAME));
+//            String activityName = c.getString(c.getColumnIndex(DatabaseHelper.COLUMN_ACTIVITY_NAME));
+//            Log.i("db : ", + _id + ", name : " + name + ", package : " + packageName
+//                    + ", activity : " + activityName);
+//        }
+        return c;
     }
 }

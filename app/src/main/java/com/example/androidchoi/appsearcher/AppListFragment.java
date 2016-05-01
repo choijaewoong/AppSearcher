@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.androidchoi.appsearcher.Adapter.AppListCursorAdapter;
 import com.example.androidchoi.appsearcher.Model.AppData;
 
 import java.util.ArrayList;
@@ -153,16 +154,16 @@ public class AppListFragment extends Fragment{
 //        Log.i("db", name + "is deleted.");
     }
 
-    public void select(){
+    public void select(String str){
         db = dbHelper.getReadableDatabase(); // 읽기 가능하도록 db 객체 불러오기
-//        String[] columns = {DatabaseHelper.COLUMN_NAME
-//                            ,DatabaseHelper.COLUMN_PACKAGE_NAME
-//                            ,DatabaseHelper.COLUMN_ACTIVITY_NAME};
-//        String whereStr = "name = ?";
-//        String[] whereParams = {"CLiP"};
-//        Cursor c = db.query(DatabaseHelper.TABLE_NAME, columns,
-//                whereStr, whereParams, null, null, null);
-        Cursor c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
+        String[] columns = {"_id", DatabaseHelper.COLUMN_NAME,
+                            DatabaseHelper.COLUMN_IMAGE,
+                            DatabaseHelper.COLUMN_PACKAGE_NAME,
+                            DatabaseHelper.COLUMN_ACTIVITY_NAME};
+        String whereStr = "name LIKE ?";
+        String[] whereParams = {"%" + str + "%"};
+        Cursor c = db.query(DatabaseHelper.TABLE_NAME, columns,
+                whereStr, whereParams, null, null, null);
 
         int recordCount = c.getCount();
         Log.i("cursor count : ", recordCount + "");
@@ -176,5 +177,4 @@ public class AppListFragment extends Fragment{
                     + ", activity : " + activityName);
         }
     }
-
 }

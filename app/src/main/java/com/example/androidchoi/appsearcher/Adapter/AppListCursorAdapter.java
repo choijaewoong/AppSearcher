@@ -1,9 +1,12 @@
-package com.example.androidchoi.appsearcher;
+package com.example.androidchoi.appsearcher.Adapter;
 
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.androidchoi.appsearcher.AppItemViewHolder;
+import com.example.androidchoi.appsearcher.R;
 
 /**
  * Created by Choi on 2016-03-11.

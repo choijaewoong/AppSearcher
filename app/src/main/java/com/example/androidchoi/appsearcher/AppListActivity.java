@@ -3,33 +3,38 @@ package com.example.androidchoi.appsearcher;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class AppListActivity extends AppCompatActivity {
 
     private MenuItem mSearchMenu;
     private boolean mIsSearchOpened = false;
+    private View mSearchView;
     private EditText mEditTextSearch;
+
+    public EditText getEditTextSearch() {
+        return mEditTextSearch;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_list);
 
-//        // App 화면 크기 설정
-//        WindowManager.LayoutParams params = getWindow().getAttributes();
-//        params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+       // App 화면 크기 설정
+       // WindowManager.LayoutParams params = getWindow().getAttributes();
+       // params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
 
         // Setting Toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -104,16 +109,34 @@ public class AppListActivity extends AppCompatActivity {
 
         // Setting EditTextView
         mEditTextSearch = (EditText)actionbar.getCustomView().findViewById(R.id.editText_search); //the text editor
-        mEditTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mEditTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    //Search Method
-                    return true;
-                }
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                FragmentManager fm = getSupportFragmentManager();
+                AppListFragment fragment = (AppListFragment)fm.findFragmentById(R.id.fragmentContainer);
+                fragment.select(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
+//        mEditTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    //Search Method
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
         mEditTextSearch.requestFocus();
         // Show Keyboard
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

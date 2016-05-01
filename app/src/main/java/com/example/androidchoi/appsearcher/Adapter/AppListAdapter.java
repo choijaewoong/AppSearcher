@@ -1,11 +1,13 @@
-package com.example.androidchoi.appsearcher;
+package com.example.androidchoi.appsearcher.Adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.androidchoi.appsearcher.AppItemViewHolder;
 import com.example.androidchoi.appsearcher.Model.AppData;
+import com.example.androidchoi.appsearcher.R;
 
 import java.util.ArrayList;
 import java.util.List;

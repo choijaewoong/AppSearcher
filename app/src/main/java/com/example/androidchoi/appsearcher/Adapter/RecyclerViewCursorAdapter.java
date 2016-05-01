@@ -1,4 +1,4 @@
-package com.example.androidchoi.appsearcher;
+package com.example.androidchoi.appsearcher.Adapter;
 
 import android.database.Cursor;
 import android.database.DataSetObserver;

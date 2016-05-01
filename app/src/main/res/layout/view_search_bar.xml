@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:hint="App Name"
+        android:hint="@string/app_search_hint"
         android:textColor="@color/colorBackground"
-        android:textColorHint="@color/colorGray"
+        android:textColorHint="@color/colorBackground"
         android:background="@android:color/transparent"
         android:imeOptions="actionSearch"
         android:layout_gravity="center_vertical"/>

@@ -127,16 +127,6 @@ public class AppListActivity extends AppCompatActivity {
 
             }
         });
-//        mEditTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    //Search Method
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
         mEditTextSearch.requestFocus();
         // Show Keyboard
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -2,9 +2,9 @@ package com.example.androidchoi.appsearcher;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,16 +16,16 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.example.androidchoi.appsearcher.Adapter.AppListPagerAdapter;
+
 public class AppListActivity extends AppCompatActivity {
 
     private MenuItem mSearchMenu;
     private boolean mIsSearchOpened = false;
-    private View mSearchView;
     private EditText mEditTextSearch;
-
-    public EditText getEditTextSearch() {
-        return mEditTextSearch;
-    }
+    private AppListPagerAdapter mAppListPagerAdapter;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +42,29 @@ public class AppListActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorBackground));
         setSupportActionBar(toolbar);
 
-        // Create Fragment
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
-        if(fragment == null){
-            fragment = new AppListFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragmentContainer, fragment)
-                    .commit();
-        }
+        // 탭 설정
+        mAppListPagerAdapter = new AppListPagerAdapter(getSupportFragmentManager());
+        mAppListPagerAdapter.addFragment(new AppListFragment());
+        mAppListPagerAdapter.addFragment(new AppListFragment());
+        mAppListPagerAdapter.addFragment(new AppListFragment());
+        mAppListPagerAdapter.setTabList(
+                new String[]{getString(R.string.app_all_list),
+                             getString(R.string.app_bookmarked_list),
+                             getString(R.string.app_recommend_list)}); // 탭 이름 설정
+        // 뷰페이저 설정
+        mViewPager = (ViewPager)findViewById(R.id.view_pager);
+        mViewPager.setAdapter(mAppListPagerAdapter);
+        mViewPager.setOffscreenPageLimit(mAppListPagerAdapter.getCount());
+        mTabLayout = (TabLayout)findViewById(R.id.sliding_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+
+//        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+//        if(fragment == null){
+//            fragment = new AppListFragment();
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.fragmentContainer, fragment)
+//                    .commit();
+//        }
     }
 
     @Override
@@ -117,9 +132,10 @@ public class AppListActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                FragmentManager fm = getSupportFragmentManager();
-                AppListFragment fragment = (AppListFragment)fm.findFragmentById(R.id.fragmentContainer);
-                fragment.filteringAppList(s.toString());
+                AppListFragment appListFragment = (AppListFragment)mAppListPagerAdapter.getItem(mViewPager.getCurrentItem());
+//                FragmentManager fm = getSupportFragmentManager();
+//                AppListFragment fragment = (AppListFragment)fm.findFragmentById(R.id.fragmentContainer);
+                appListFragment.filteringAppList(s.toString());
             }
 
             @Override

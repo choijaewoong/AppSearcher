@@ -9,10 +9,10 @@
     <dimen name="dimen_app_list_activity_width">280dp</dimen>
     <dimen name="dimen_app_list_activity_height">300dp</dimen>
 
+    <!-- 탭 인디케이터 굵기-->
+    <dimen name="tab_indicator_height">4dp</dimen>
     <!-- App List Item View-->
     <dimen name="dimen_app_image_size">32dp</dimen>
     <dimen name="dimen_font_title_size">15dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+
 </resources>

@@ -3,5 +3,9 @@
     <string name="app_search">App Search</string>
     <string name="action_search">Search</string>
 
+    <string name="app_all_list">전체</string>
+    <string name="app_bookmarked_list">즐겨찾기</string>
+    <string name="app_recommend_list">추천 앱</string>
+
     <string name="app_search_hint">앱 이름을 검색하세요</string>
 </resources>

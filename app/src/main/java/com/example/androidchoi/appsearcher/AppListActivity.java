@@ -2,11 +2,11 @@ package com.example.androidchoi.appsearcher;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,8 +17,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.androidchoi.appsearcher.Adapter.AppListPagerAdapter;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class AppListActivity extends AppCompatActivity {
+public class AppListActivity extends SlidingFragmentActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
+
+    public static final String TAG_APP_LIST = "tagAppList";
+    public static final String TAG_APP_BOARD = "tagAppBoard";
+    public static final String TAG_SETTING = "tagSetting";
 
     private MenuItem mSearchMenu;
     private boolean mIsSearchOpened = false;
@@ -26,11 +33,13 @@ public class AppListActivity extends AppCompatActivity {
     private AppListPagerAdapter mAppListPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private SlidingMenu mSlidingMenu;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_list);
+        setBehindContentView(R.layout.slidingmenu_main); //Setting SlidingMenu
 
         // Setting Toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -40,21 +49,36 @@ public class AppListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 홈 메뉴 생성
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_list);
 
-        // 탭 설정
-        mAppListPagerAdapter = new AppListPagerAdapter(getSupportFragmentManager());
-        mAppListPagerAdapter.addFragment(new AppAllListFragment());
-        mAppListPagerAdapter.addFragment(new AppAllListFragment());
-        mAppListPagerAdapter.addFragment(new AppAllListFragment());
-        mAppListPagerAdapter.setTabList(
-                new String[]{getString(R.string.app_all_list),
-                             getString(R.string.app_bookmarked_list),
-                             getString(R.string.app_recommend_list)}); // 탭 이름 설정
-        // 뷰페이저 설정
-        mViewPager = (ViewPager)findViewById(R.id.view_pager);
-        mViewPager.setAdapter(mAppListPagerAdapter);
-        mViewPager.setOffscreenPageLimit(mAppListPagerAdapter.getCount());
-        mTabLayout = (TabLayout)findViewById(R.id.sliding_tabs);
-        mTabLayout.setupWithViewPager(mViewPager);
+        if (savedInstanceState == null) {
+//          getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new AppAllListFragment(), TAG_APP_LIST).commit();
+        }
+
+        mSlidingMenu = getSlidingMenu();
+        mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
+        mSlidingMenu.setShadowDrawable(R.drawable.shadow_nav_menu);
+        mSlidingMenu.setShadowWidthRes(R.dimen.shadow_menu_width);
+        mSlidingMenu.setFadeDegree(0.3f); //블러처리 해제
+        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+//        // 탭 설정
+//        mAppListPagerAdapter = new AppListPagerAdapter(getSupportFragmentManager());
+//        mAppListPagerAdapter.addFragment(new AppAllListFragment());
+//        mAppListPagerAdapter.addFragment(new AppAllListFragment());
+//        mAppListPagerAdapter.addFragment(new AppAllListFragment());
+//        mAppListPagerAdapter.setTabList(
+//                new String[]{getString(R.string.app_all_list),
+//                             getString(R.string.app_bookmarked_list),
+//                             getString(R.string.app_recommend_list)}); // 탭 이름 설정
+//        // 뷰페이저 설정
+//        mViewPager = (ViewPager)findViewById(R.id.view_pager);
+//        mViewPager.setAdapter(mAppListPagerAdapter);
+//        mViewPager.setOffscreenPageLimit(mAppListPagerAdapter.getCount());
+//        mTabLayout = (TabLayout)findViewById(R.id.sliding_tabs);
+//        mTabLayout.setupWithViewPager(mViewPager);
 
 //        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
 //        if(fragment == null){
@@ -83,6 +107,7 @@ public class AppListActivity extends AppCompatActivity {
 
         switch(id){
             case android.R.id.home:
+                toggle();
                 return true;
             case R.id.action_search:
                 handleSearchView();
@@ -150,5 +175,11 @@ public class AppListActivity extends AppCompatActivity {
         //close icon 으로 변경
         mSearchMenu.setIcon(ContextCompat.getDrawable(this, R.drawable.icon_close));
         mIsSearchOpened = true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        showContent();
+        return true;
     }
 }

@@ -3,6 +3,11 @@
     <string name="app_search">App Search</string>
     <string name="action_search">Search</string>
 
+    <!-- menu -->
+    <string name="menu_app_list">앱 리스트</string>
+    <string name="menu_app_board">게시판</string>
+    <string name="menu_app_setting">설정</string>
+
     <string name="app_all_list">전체</string>
     <string name="app_bookmarked_list">즐겨찾기</string>
     <string name="app_recommend_list">추천 앱</string>

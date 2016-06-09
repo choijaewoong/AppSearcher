@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.androidchoi.appsearcher.AppItemViewHolder;
+import com.example.androidchoi.appsearcher.ViewHolder.AppItemViewHolder;
 import com.example.androidchoi.appsearcher.R;
 
 /**
@@ -24,7 +24,7 @@ public class AppListCursorAdapter extends RecyclerViewCursorAdapter<AppItemViewH
 
     @Override
     public AppItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_app_item, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_app_default_item, null);
         return new AppItemViewHolder(view);
     }
 

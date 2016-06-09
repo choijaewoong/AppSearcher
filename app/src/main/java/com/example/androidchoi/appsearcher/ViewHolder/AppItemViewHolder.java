@@ -1,4 +1,4 @@
-package com.example.androidchoi.appsearcher;
+package com.example.androidchoi.appsearcher.ViewHolder;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.androidchoi.appsearcher.DatabaseHelper;
 import com.example.androidchoi.appsearcher.Model.AppData;
+import com.example.androidchoi.appsearcher.R;
 
 /**
  * Created by Tacademy on 2015-10-06.

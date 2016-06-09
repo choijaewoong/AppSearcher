@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Adapter.AppListCursorAdapter;
 import com.example.androidchoi.appsearcher.Model.AppData;
+import com.example.androidchoi.appsearcher.ViewHolder.AppItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_app_item"
+        app:cardCornerRadius="@dimen/dimen_min_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_default"
+        android:layout_marginRight="@dimen/dimen_default"
+        android:layout_marginTop="@dimen/dimen_min_default"
+        android:layout_marginBottom="@dimen/dimen_min_default"
+        android:foreground="?android:attr/selectableItemBackground">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:layout_width="@dimen/dimen_app_image_size"
+                android:layout_height="@dimen/dimen_app_image_size"
+                android:id="@+id/image_app_logo"
+                android:layout_margin="@dimen/dimen_small_default"/>
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_large"
+                android:id="@+id/text_app_name"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/image_app_logo"
+                android:layout_marginLeft="@dimen/dimen_small_default"/>
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/image_pop_up_button"
+                android:src="@drawable/icon_pop_up"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/dimen_small_default"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

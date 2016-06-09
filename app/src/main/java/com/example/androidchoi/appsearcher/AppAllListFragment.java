@@ -18,8 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.androidchoi.appsearcher.Adapter.AppListCursorAdapter;
+import com.example.androidchoi.appsearcher.Adapter.AppDefaultListCursorAdapter;
 import com.example.androidchoi.appsearcher.Model.AppData;
+import com.example.androidchoi.appsearcher.ViewHolder.AppDefualtItemViewHolder;
+import com.example.androidchoi.appsearcher.ViewHolder.AppItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +38,7 @@ public class AppAllListFragment extends Fragment{
     private SQLiteDatabase db;
 
     RecyclerView mRecyclerView;
-    AppListCursorAdapter mAdapter;
+    AppDefaultListCursorAdapter mAdapter;
 
     public AppAllListFragment() {
         // Required empty public constructor
@@ -62,7 +64,7 @@ public class AppAllListFragment extends Fragment{
             initAppList();
             c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
         }
-        mAdapter = new AppListCursorAdapter(c);
+        mAdapter = new AppDefaultListCursorAdapter(c);
 
         // item 클릭시 해당 앱 실행
         mAdapter.setOnItemClickListener(new AppItemViewHolder.OnItemClickListener() {
@@ -78,6 +80,12 @@ public class AppAllListFragment extends Fragment{
                 }catch(ActivityNotFoundException e){
                     Toast.makeText(getActivity(),"존재하지 않는 Application 입니다.", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        mAdapter.setOnPopUpButtonClickListener(new AppDefualtItemViewHolder.OnPopUpButtonClickListener() {
+            @Override
+            public void onPopUpButtonClick(String packageName, String activityName, int position) {
+                Toast.makeText(getContext(), packageName + "/" + activityName + "/ " + position, Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setAdapter(mAdapter);

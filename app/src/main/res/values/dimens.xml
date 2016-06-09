@@ -3,6 +3,7 @@
     <dimen name="dimen_default">16dp</dimen>
     <dimen name="dimen_small_default">8dp</dimen>
     <dimen name="dimen_min_default">4dp</dimen>
+    <dimen name="dimen_divider">0.25dp</dimen>
 
     <dimen name="dimen_toolbar_height">48dp</dimen>
     <dimen name="dimen_toolbar_shadow">4dp</dimen>
@@ -14,9 +15,12 @@
     <dimen name="tab_indicator_height">4dp</dimen>
     <!-- App List Item View-->
     <dimen name="dimen_app_image_size">32dp</dimen>
-    <dimen name="dimen_font_title_size">15dp</dimen>
+    <dimen name="font_size_large">16dp</dimen>
+    <dimen name="font_size_default">14dp</dimen>
+    <dimen name="font_size_title">20dp</dimen>
     <!-- sliding menu -->
-    <dimen name="menu_width">280dp</dimen>
-    <dimen name="shadow_menu_width">6dp</dimen>
+    <dimen name="sliding_menu_header_size">180dp</dimen>
+    <dimen name="sliding_menu_width">240dp</dimen>
+    <dimen name="sliding_menu_shadow_width">6dp</dimen>
 
 </resources>

@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/dimen_default"
                 android:paddingRight="@dimen/dimen_default"
-                android:textSize="@dimen/dimen_font_title_size"
+                android:textSize="@dimen/font_size_large"
                 android:id="@+id/text_app_name"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/image_app_logo"/>

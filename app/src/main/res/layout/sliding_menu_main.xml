@@ -15,6 +15,6 @@
         app:menu="@menu/sliding_menu"
         app:itemTextColor="@android:color/white"
         app:itemIconTint="@android:color/white"
-        app:itemBackground="@drawable/selector_navigation_menu"/>
+        app:itemBackground="@drawable/selector_sliding_menu"/>
     <!--app:headerLayout="@layout/nav_header_main"-->
 </FrameLayout>

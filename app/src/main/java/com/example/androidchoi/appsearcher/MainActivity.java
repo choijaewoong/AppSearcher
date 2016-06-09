@@ -33,7 +33,7 @@ public class MainActivity extends SlidingFragmentActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setBehindContentView(R.layout.slidingmenu_main); //Setting SlidingMenu
+        setBehindContentView(R.layout.sliding_menu_main); //Setting SlidingMenu
 
         // Setting Toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -48,15 +48,17 @@ public class MainActivity extends SlidingFragmentActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new AppListContainerFragment(), TAG_APP_LIST).commit();
         }
 
+        //슬라이딩 메뉴 설정
         mSlidingMenu = getSlidingMenu();
-        mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
-        mSlidingMenu.setShadowDrawable(R.drawable.shadow_nav_menu);
-        mSlidingMenu.setShadowWidthRes(R.dimen.shadow_menu_width);
+        mSlidingMenu.setBehindWidthRes(R.dimen.sliding_menu_width);
+        mSlidingMenu.setShadowDrawable(R.drawable.shadow_sliding_menu);
+        mSlidingMenu.setShadowWidthRes(R.dimen.sliding_menu_shadow_width);
         mSlidingMenu.setFadeDegree(0.3f); //블러처리 해제
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View navHeaderView = getLayoutInflater().inflate(R.layout.sliding_menu_header, null);
+        navigationView.addHeaderView(navHeaderView);
 
     }
 

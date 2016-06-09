@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="@string/app_search_hint"
-        android:textColorHint="@color/colorBackground"
-        android:textColor="@android:color/tertiary_text_dark"
+        android:textColorHint="@color/colorTextHint"
+        android:textColor="@color/colorBackground"
         android:background="@android:color/transparent"
         android:imeOptions="actionSearch"
         android:layout_gravity="center_vertical"/>

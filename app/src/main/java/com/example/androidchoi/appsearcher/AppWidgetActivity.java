@@ -96,14 +96,14 @@ public class AppWidgetActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         //search icon 으로 변경
-        mSearchMenu.setIcon(ContextCompat.getDrawable(this, R.drawable.icon_search));
+        mSearchMenu.setIcon(ContextCompat.getDrawable(this, R.drawable.icon_search_widget));
         mIsSearchOpened = false;
     }
     public void openSearchView(){
         ActionBar actionbar = getSupportActionBar();
         // TitleView에서 editText CustomView 로 전환
         actionbar.setDisplayShowCustomEnabled(true);
-        View view = getLayoutInflater().inflate(R.layout.view_search_bar, null);
+        View view = getLayoutInflater().inflate(R.layout.view_widget_search_bar, null);
         Toolbar.LayoutParams layoutParams = new Toolbar.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.MATCH_PARENT);
         actionbar.setCustomView(view, layoutParams);
         actionbar.setDisplayShowTitleEnabled(false);
@@ -133,7 +133,7 @@ public class AppWidgetActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(mEditTextSearch, InputMethodManager.SHOW_IMPLICIT);
         //close icon 으로 변경
-        mSearchMenu.setIcon(ContextCompat.getDrawable(this, R.drawable.icon_close));
+        mSearchMenu.setIcon(ContextCompat.getDrawable(this, R.drawable.icon_close_widget));
         mIsSearchOpened = true;
     }
 }

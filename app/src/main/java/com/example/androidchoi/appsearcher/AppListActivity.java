@@ -39,8 +39,10 @@ public class AppListActivity extends AppCompatActivity {
         // Setting Toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_search);
-        toolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorBackground));
+        toolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(), R.color.colorText));
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 홈 메뉴 생성
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_list);
 
         // 탭 설정
         mAppListPagerAdapter = new AppListPagerAdapter(getSupportFragmentManager());
@@ -84,6 +86,8 @@ public class AppListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch(id){
+            case android.R.id.home:
+                return true;
             case R.id.action_search:
                 handleSearchView();
                 return true;

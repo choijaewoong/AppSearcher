@@ -28,5 +28,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     // CardView
     compile 'com.android.support:cardview-v7:23.1.1'
-
+    // Http 통신 Volley Library
+    compile files('libs/volley_library.jar')
+    // Json Parsing Library
+    compile 'com.google.code.gson:gson:2.2.4'
 }

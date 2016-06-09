@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AppListFragment extends Fragment{
+public class AppAllListFragment extends Fragment{
 
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
@@ -38,7 +38,7 @@ public class AppListFragment extends Fragment{
     RecyclerView mRecyclerView;
     AppListCursorAdapter mAdapter;
 
-    public AppListFragment() {
+    public AppAllListFragment() {
         // Required empty public constructor
     }
 
@@ -52,7 +52,7 @@ public class AppListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_app_list, container, false);
+        View view =  inflater.inflate(R.layout.fragment_app_all_list, container, false);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recylerView_appList);
 
         db = dbHelper.getReadableDatabase(); // 읽기 가능하도록 db 객체 불러오기

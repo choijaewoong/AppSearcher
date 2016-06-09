@@ -32,10 +32,6 @@ public class AppListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_list);
 
-       // App 화면 크기 설정
-       // WindowManager.LayoutParams params = getWindow().getAttributes();
-       // params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-
         // Setting Toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_search);
@@ -46,9 +42,9 @@ public class AppListActivity extends AppCompatActivity {
 
         // 탭 설정
         mAppListPagerAdapter = new AppListPagerAdapter(getSupportFragmentManager());
-        mAppListPagerAdapter.addFragment(new AppListFragment());
-        mAppListPagerAdapter.addFragment(new AppListFragment());
-        mAppListPagerAdapter.addFragment(new AppListFragment());
+        mAppListPagerAdapter.addFragment(new AppAllListFragment());
+        mAppListPagerAdapter.addFragment(new AppAllListFragment());
+        mAppListPagerAdapter.addFragment(new AppAllListFragment());
         mAppListPagerAdapter.setTabList(
                 new String[]{getString(R.string.app_all_list),
                              getString(R.string.app_bookmarked_list),
@@ -136,10 +132,10 @@ public class AppListActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                AppListFragment appListFragment = (AppListFragment)mAppListPagerAdapter.getItem(mViewPager.getCurrentItem());
+                AppAllListFragment appAllListFragment = (AppAllListFragment)mAppListPagerAdapter.getItem(mViewPager.getCurrentItem());
 //                FragmentManager fm = getSupportFragmentManager();
 //                AppListFragment fragment = (AppListFragment)fm.findFragmentById(R.id.fragmentContainer);
-                appListFragment.filteringAppList(s.toString());
+                appAllListFragment.filteringAppList(s.toString());
             }
 
             @Override

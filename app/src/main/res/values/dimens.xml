@@ -5,6 +5,7 @@
     <dimen name="dimen_min_default">4dp</dimen>
 
     <dimen name="dimen_toolbar_height">48dp</dimen>
+    <dimen name="dimen_toolbar_shadow">4dp</dimen>
 
     <dimen name="dimen_app_list_activity_width">280dp</dimen>
     <dimen name="dimen_app_list_activity_height">300dp</dimen>

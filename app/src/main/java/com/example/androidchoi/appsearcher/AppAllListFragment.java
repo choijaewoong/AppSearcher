@@ -68,7 +68,7 @@ public class AppAllListFragment extends Fragment{
         mAdapter.setOnItemClickListener(new AppItemViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(String packageName, String activityName, int position) {
-                ((AppListActivity)getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.
+                ((MainActivity)getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.
                 try{
                     //해당 App의 PackageName, activityName을 이용해 App 실행
                     Intent intent = new Intent(Intent.ACTION_MAIN);

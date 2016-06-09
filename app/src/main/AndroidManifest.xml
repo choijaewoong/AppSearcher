@@ -21,7 +21,7 @@
                 android:resource="@xml/view_widget" />
         </receiver>
         <activity
-            android:name=".AppListActivity">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

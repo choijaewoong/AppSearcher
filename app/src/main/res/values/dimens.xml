@@ -1,5 +1,6 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="dimen_large_default">24dp</dimen>
     <dimen name="dimen_default">16dp</dimen>
     <dimen name="dimen_small_default">8dp</dimen>
     <dimen name="dimen_min_default">4dp</dimen>
@@ -17,6 +18,7 @@
     <dimen name="dimen_app_image_size">32dp</dimen>
     <dimen name="font_size_large">16dp</dimen>
     <dimen name="font_size_default">14dp</dimen>
+    <dimen name="font_size_small">10dp</dimen>
     <dimen name="font_size_title">20dp</dimen>
     <!-- sliding menu -->
     <dimen name="sliding_menu_header_size">180dp</dimen>

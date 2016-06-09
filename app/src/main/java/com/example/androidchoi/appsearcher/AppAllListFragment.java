@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +40,8 @@ public class AppAllListFragment extends Fragment{
 
     RecyclerView mRecyclerView;
     AppDefaultListCursorAdapter mAdapter;
+    CustomPopupWindow popup;
+    boolean isShwoing = false;
 
     public AppAllListFragment() {
         // Required empty public constructor
@@ -82,10 +85,23 @@ public class AppAllListFragment extends Fragment{
                 }
             }
         });
+        // popup 버튼 클릭시 popup 메뉴 생성
         mAdapter.setOnPopUpButtonClickListener(new AppDefualtItemViewHolder.OnPopUpButtonClickListener() {
             @Override
-            public void onPopUpButtonClick(String packageName, String activityName, int position) {
-                Toast.makeText(getContext(), packageName + "/" + activityName + "/ " + position, Toast.LENGTH_SHORT).show();
+            public void onPopUpButtonClick(View view, String packageName, String activityName, int position) {
+//                Toast.makeText(getContext(), packageName + "/" + activityName + "/ " + position, Toast.LENGTH_SHORT).show();
+                if (popup == null) {
+                    popup = new CustomPopupWindow(getActivity());
+                    popup.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), android.R.color.transparent));
+                }
+                if (isShwoing) {
+                    popup.dismiss();
+                    isShwoing = false;
+                } else {
+                    popup.setAppInfo(packageName, activityName);
+                    popup.showAsDropDown(view, 0, -50);
+                    isShwoing = true;
+                }
             }
         });
         mRecyclerView.setAdapter(mAdapter);

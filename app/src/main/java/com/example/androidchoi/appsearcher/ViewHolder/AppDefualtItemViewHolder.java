@@ -12,7 +12,7 @@ import com.example.androidchoi.appsearcher.R;
 public class AppDefualtItemViewHolder extends AppItemViewHolder {
 
     public interface OnPopUpButtonClickListener {
-        public void onPopUpButtonClick(String packageName, String activityName, int position);
+        public void onPopUpButtonClick(View view, String packageName, String activityName, int position);
     }
     OnPopUpButtonClickListener mPopUpButtonClickListenerListener;
     public void setOnPopUpButtonClickListener(OnPopUpButtonClickListener listener) {
@@ -29,7 +29,7 @@ public class AppDefualtItemViewHolder extends AppItemViewHolder {
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 if (mPopUpButtonClickListenerListener != null && position != RecyclerView.NO_POSITION) {
-                    mPopUpButtonClickListenerListener.onPopUpButtonClick(packageName, activityName, position);
+                    mPopUpButtonClickListenerListener.onPopUpButtonClick(v, packageName, activityName, position);
                 }
             }
         });

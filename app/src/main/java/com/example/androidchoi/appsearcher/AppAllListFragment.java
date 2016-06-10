@@ -41,7 +41,6 @@ public class AppAllListFragment extends Fragment{
     RecyclerView mRecyclerView;
     AppDefaultListCursorAdapter mAdapter;
     CustomPopupWindow popup;
-    boolean isShwoing = false;
 
     public AppAllListFragment() {
         // Required empty public constructor
@@ -94,13 +93,11 @@ public class AppAllListFragment extends Fragment{
                     popup = new CustomPopupWindow(getActivity());
                     popup.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), android.R.color.transparent));
                 }
-                if (isShwoing) {
+                if (popup.isShowing()) {
                     popup.dismiss();
-                    isShwoing = false;
                 } else {
                     popup.setAppInfo(packageName, activityName);
                     popup.showAsDropDown(view, 0, -50);
-                    isShwoing = true;
                 }
             }
         });

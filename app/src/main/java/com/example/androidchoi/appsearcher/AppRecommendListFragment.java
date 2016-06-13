@@ -12,19 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.androidchoi.appsearcher.Adapter.AppBookmarkedListAdapter;
-import com.example.androidchoi.appsearcher.ViewHolder.AppBookmarkedItemViewHolder;
+import com.example.androidchoi.appsearcher.Adapter.AppRecommendListAdapter;
+import com.example.androidchoi.appsearcher.ViewHolder.AppRecommendItemViewHolder;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AppBookmarkedListFragment extends Fragment {
+public class AppRecommendListFragment extends Fragment {
 
     RecyclerView mRecyclerView;
-    AppBookmarkedListAdapter mAppBookmarkedListAdapter;
+    AppRecommendListAdapter mAppRecommendListAdapter;
 
-    public AppBookmarkedListFragment() {
+    public AppRecommendListFragment() {
         // Required empty public constructor
     }
 
@@ -32,16 +32,16 @@ public class AppBookmarkedListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_app_bookmarked_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_app_recommend_list, container, false);
 
         // RecyclerVIew 세팅
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recylerView_appBookmarkedList);
-        mAppBookmarkedListAdapter = new AppBookmarkedListAdapter();
-        mRecyclerView.setAdapter(mAppBookmarkedListAdapter);
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recylerView_appRecommendList);
+        mAppRecommendListAdapter = new AppRecommendListAdapter();
+        mRecyclerView.setAdapter(mAppRecommendListAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mAppBookmarkedListAdapter.setOnItemClickListener(new AppBookmarkedItemViewHolder.OnItemClickListener() {
+        mAppRecommendListAdapter.setOnItemClickListener(new AppRecommendItemViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(String packageName, String activityName, int position) {
                 ((MainActivity) getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.

@@ -36,7 +36,7 @@ public class AppListContainerFragment extends Fragment {
         mAppListPagerAdapter = new AppListPagerAdapter(getChildFragmentManager());
         mAppListPagerAdapter.addFragment(new AppAllListFragment());
         mAppListPagerAdapter.addFragment(new AppBookmarkedListFragment());
-        mAppListPagerAdapter.addFragment(new AppAllListFragment());
+        mAppListPagerAdapter.addFragment(new AppRecommendListFragment());
         mAppListPagerAdapter.setTabList(
                 new String[]{getString(R.string.app_all_list),
                              getString(R.string.app_bookmarked_list),

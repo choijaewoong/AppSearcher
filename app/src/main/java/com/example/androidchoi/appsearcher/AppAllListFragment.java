@@ -56,7 +56,6 @@ public class AppAllListFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_app_all_list, container, false);
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recylerView_appList);
 
         db = dbHelper.getReadableDatabase(); // 읽기 가능하도록 db 객체 불러오기
         Cursor c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
@@ -65,21 +64,27 @@ public class AppAllListFragment extends Fragment{
             initAppList();
             c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
         }
+
+        // RecyclerVIew, Adapter 세팅
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recylerView_appList);
         mAdapter = new AppDefaultListCursorAdapter(c);
+        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
 
         // item 클릭시 해당 앱 실행
         mAdapter.setOnItemClickListener(new AppDefualtItemViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(String packageName, String activityName, int position) {
-                ((MainActivity)getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.
-                try{
+                ((MainActivity) getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.
+                try {
                     //해당 App의 PackageName, activityName을 이용해 App 실행
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.setClassName(packageName, activityName);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                }catch(ActivityNotFoundException e){
-                    Toast.makeText(getActivity(),"존재하지 않는 Application 입니다.", Toast.LENGTH_SHORT).show();
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getActivity(), "존재하지 않는 Application 입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -100,11 +105,6 @@ public class AppAllListFragment extends Fragment{
                 }
             }
         });
-        mRecyclerView.setAdapter(mAdapter);
-        // Vertical RecyclerView
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
-
         return view;
     }
 

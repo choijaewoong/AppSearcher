@@ -51,5 +51,10 @@ public class AppListContainerFragment extends Fragment {
         return view;
     }
 
+    public Fragment getCurrentFragment(){
+//        Log.i("getCurrentFragment", getCurrentFragment().toString());
+        return mAppListPagerAdapter.getItem(mViewPager.getCurrentItem());
+    }
+
 
 }

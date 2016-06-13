@@ -131,9 +131,9 @@ public class MainActivity extends SlidingFragmentActivity
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                AppAllListFragment appAllListFragment = (AppAllListFragment)mAppListPagerAdapter.getItem(mViewPager.getCurrentItem());
-//                FragmentManager fm = getSupportFragmentManager();
-//                AppListFragment fragment = (AppListFragment)fm.findFragmentById(R.id.fragmentContainer);
-//                appAllListFragment.filteringAppList(s.toString());
+                AppListContainerFragment fragment = (AppListContainerFragment)getSupportFragmentManager().findFragmentByTag(TAG_APP_LIST);
+                AppAllListFragment appAllListFragment = (AppAllListFragment)fragment.getCurrentFragment();
+                appAllListFragment.filteringAppList(s.toString());
             }
 
             @Override

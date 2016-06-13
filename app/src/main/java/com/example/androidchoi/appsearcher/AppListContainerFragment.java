@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,6 @@ public class AppListContainerFragment extends Fragment {
     public AppListContainerFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +47,31 @@ public class AppListContainerFragment extends Fragment {
         mViewPager.setOffscreenPageLimit(mAppListPagerAdapter.getCount());
         mTabLayout = (TabLayout)view.findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.i("position", "position" + position);
+                MainActivity mainActivity = ((MainActivity)getActivity());
+                if(position == 0) {
+                    ((AppAllListFragment)mAppListPagerAdapter.getItem(position)).filteringAppList("");
+                    mainActivity.showSearchMenu();
+                } else {
+                    mainActivity.closeSearchView();
+                    mainActivity.hideSearchMenu();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         return view;
     }

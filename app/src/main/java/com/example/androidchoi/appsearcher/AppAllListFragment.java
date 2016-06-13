@@ -40,9 +40,11 @@ public class AppAllListFragment extends Fragment{
     RecyclerView mRecyclerView;
     AppDefaultListCursorAdapter mAdapter;
     CustomPopupWindow popup;
+    private String keyword;
 
     public AppAllListFragment() {
         // Required empty public constructor
+        keyword = "";
     }
 
     @Override
@@ -141,6 +143,13 @@ public class AppAllListFragment extends Fragment{
 
     // 검색을 이용하여 App Filtering 하는 Method
     public void filteringAppList(String str){
+        if(keyword.equals(str)){
+            return;
+        }
+        keyword = str;
+        if(keyword.equals("")){
+            mAdapter.changeCursor(selectAll());
+        }
         Cursor cursor = select(str);
         mAdapter.changeCursor(cursor);
     }
@@ -203,5 +212,17 @@ public class AppAllListFragment extends Fragment{
 //                    + ", activity : " + activityName);
 //        }
         return c;
+    }
+
+    public Cursor selectAll(){
+        db = dbHelper.getReadableDatabase(); // 읽기 가능하도록 db 객체 불러오기
+        String[] columns = {"_id", DatabaseHelper.COLUMN_NAME,
+                DatabaseHelper.COLUMN_IMAGE,
+                DatabaseHelper.COLUMN_PACKAGE_NAME,
+                DatabaseHelper.COLUMN_ACTIVITY_NAME};
+        Cursor c = db.query(DatabaseHelper.TABLE_NAME, columns,
+                null, null, null, null, null);
+        return c;
+
     }
 }

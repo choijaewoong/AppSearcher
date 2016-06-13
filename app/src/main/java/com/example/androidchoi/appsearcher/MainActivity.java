@@ -59,7 +59,13 @@ public class MainActivity extends SlidingFragmentActivity
         navigationView.setNavigationItemSelectedListener(this);
         View navHeaderView = getLayoutInflater().inflate(R.layout.sliding_menu_header, null);
         navigationView.addHeaderView(navHeaderView);
+    }
 
+    public void showSearchMenu(){
+        mSearchMenu.setVisible(true);
+    }
+    public void hideSearchMenu(){
+        mSearchMenu.setVisible(false);
     }
 
     @Override

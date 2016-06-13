@@ -2,8 +2,10 @@ package com.example.androidchoi.appsearcher;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,19 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.androidchoi.appsearcher.Manager.MyApplication;
+import com.example.androidchoi.appsearcher.Manager.NetworkManager;
+import com.example.androidchoi.appsearcher.Model.SignInData;
+import com.example.androidchoi.appsearcher.Model.UserData;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SignInFragment extends Fragment {
+
+    public static final String MESSAGE_SUCCESS = "success";
 
     TextView mTextSignUp;
     TextView mTextFailMessage;
@@ -37,7 +47,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 hideSoftKeyboard();
-                logIn();
+                signIn();
             }
         });
 
@@ -46,7 +56,7 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 hideSoftKeyboard();
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.login_container, new WriteUserInputFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.login_container, new WriteUserInputFragment()).addToBackStack("write").commit();
             }
         });
         mEditEmail = (EditText) view.findViewById(R.id.editText_login_email);
@@ -54,7 +64,27 @@ public class SignInFragment extends Fragment {
         return view;
     }
 
-    public void logIn() {
+    public void signIn() {
+        final String email = mEditEmail.getText().toString();
+        final String password = mEditPassWord.getText().toString();
+        NetworkManager.getInstance().signIn(email, password, new NetworkManager.OnResultListener<SignInData>() {
+            @Override
+            public void onSuccess(SignInData result) {
+                if(result.getMessage().equals(MESSAGE_SUCCESS)){
+                    UserData user = result.getUser();
+                    startActivity(new Intent(getContext(), MainActivity.class));
+                    getActivity().finish();
+                }else{
+                    Toast.makeText(MyApplication.getContext(), "입력 정보가 잘못 되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                Log.i("error : ", error);
+                Toast.makeText(MyApplication.getContext(), "로그인 요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

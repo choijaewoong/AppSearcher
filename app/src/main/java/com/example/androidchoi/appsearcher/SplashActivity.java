@@ -16,8 +16,8 @@ public class SplashActivity extends AppCompatActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                goMain();
-//                goLogin();
+//                goMain();
+                goLogin();
             }
         }, 1000);
     }

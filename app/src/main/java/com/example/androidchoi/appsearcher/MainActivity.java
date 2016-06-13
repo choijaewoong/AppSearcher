@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.example.androidchoi.appsearcher.Model.UserSingletonData;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -28,6 +30,8 @@ public class MainActivity extends SlidingFragmentActivity
     private boolean mIsSearchOpened = false;
     private EditText mEditTextSearch;
     private SlidingMenu mSlidingMenu;
+    TextView mUserName;
+    TextView mUserEmail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,10 +59,16 @@ public class MainActivity extends SlidingFragmentActivity
         mSlidingMenu.setShadowWidthRes(R.dimen.sliding_menu_shadow_width);
         mSlidingMenu.setFadeDegree(0.3f); //블러처리 해제
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+
+        // 슬라이딩 메뉴 헤더 뷰
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View navHeaderView = getLayoutInflater().inflate(R.layout.sliding_menu_header, null);
         navigationView.addHeaderView(navHeaderView);
+        mUserEmail = (TextView) navHeaderView.findViewById(R.id.text_user_email);
+        mUserName = (TextView) navHeaderView.findViewById(R.id.text_user_name);
+        mUserEmail.setText(UserSingletonData.getInstance().getEmail());
+        mUserName.setText(UserSingletonData.getInstance().getName());
     }
 
     public void showSearchMenu(){

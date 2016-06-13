@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Manager.MyApplication;
 import com.example.androidchoi.appsearcher.Manager.NetworkManager;
+import com.example.androidchoi.appsearcher.Manager.PropertyManager;
 import com.example.androidchoi.appsearcher.Model.SignInData;
 import com.example.androidchoi.appsearcher.Model.UserData;
+import com.example.androidchoi.appsearcher.Model.UserSingletonData;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,13 +74,15 @@ public class SignInFragment extends Fragment {
             public void onSuccess(SignInData result) {
                 if(result.getMessage().equals(MESSAGE_SUCCESS)){
                     UserData user = result.getUser();
+                    PropertyManager.getInstance().setEmail(email);
+                    PropertyManager.getInstance().setPassword(password);
+                    UserSingletonData.getInstance().setUser(user.getEmail(), user.getName());
                     startActivity(new Intent(getContext(), MainActivity.class));
                     getActivity().finish();
                 }else{
                     Toast.makeText(MyApplication.getContext(), "입력 정보가 잘못 되었습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFail(String error) {
                 Log.i("error : ", error);

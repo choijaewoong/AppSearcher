@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.androidchoi.appsearcher.Model.AppList;
 import com.example.androidchoi.appsearcher.Model.AppServerData;
 import com.example.androidchoi.appsearcher.Model.AppServerDataLab;
 import com.example.androidchoi.appsearcher.Model.SignInData;
@@ -46,6 +47,26 @@ public class NetworkManager {
     }
 
     private static final String SERVER = "http://52.78.29.249";
+
+    // 즐겨 찾기 목록 가져오기
+    private static final String SHOW_APP_LIST = SERVER + "/applist";
+    public void showAppList(final OnResultListener<AppList> listener){
+        request.add(new StringRequest(Request.Method.GET, SHOW_APP_LIST,
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String s) {
+                        Log.i("asdfasf", s);
+                        AppList appList = gson.fromJson(s, AppList.class);
+                        listener.onSuccess(appList);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        listener.onFail(volleyError.getMessage());
+                    }
+                })
+        );
+    }
 
     // 앱 즐겨 찾기
     private static final String ADD_APP = SERVER + "/addapp";

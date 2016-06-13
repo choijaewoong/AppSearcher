@@ -42,6 +42,8 @@ public class AppBookmarkedItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setItems(AppServerData serverData){
-
+        textAppName.setText(serverData.getName());
+        packageName = serverData.getPackageName();
+        activityName = serverData.getActivityName();
     }
 }

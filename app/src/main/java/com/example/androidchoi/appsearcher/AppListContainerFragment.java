@@ -58,12 +58,22 @@ public class AppListContainerFragment extends Fragment {
             public void onPageSelected(int position) {
                 Log.i("position", "position" + position);
                 MainActivity mainActivity = ((MainActivity)getActivity());
-                if(position == 0) {
-                    ((AppAllListFragment)mAppListPagerAdapter.getItem(position)).filteringAppList("");
-                    mainActivity.showSearchMenu();
-                } else {
-                    mainActivity.closeSearchView();
-                    mainActivity.hideSearchMenu();
+                switch (position){
+                    case 0:
+                        ((AppAllListFragment)mAppListPagerAdapter.getItem(position)).filteringAppList("");
+                        mainActivity.showSearchMenu();
+                        break;
+                    case 1:
+                        ((AppBookmarkedListFragment)mAppListPagerAdapter.getItem(position)).refreshList();
+                        mainActivity.closeSearchView();
+                        mainActivity.hideSearchMenu();
+                        break;
+                    case 2:
+                        mainActivity.closeSearchView();
+                        mainActivity.hideSearchMenu();
+                        break;
+                    default:
+                        break;
                 }
             }
 

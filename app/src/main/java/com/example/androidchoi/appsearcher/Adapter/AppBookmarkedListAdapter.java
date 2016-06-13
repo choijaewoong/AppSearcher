@@ -21,18 +21,12 @@ public class AppBookmarkedListAdapter extends RecyclerView.Adapter<AppBookmarked
         mItemClickListener = listener;
     }
 
-    // PlaceData get 메소드
+    // AppServerData get 메소드
     public AppServerData getItem(int position){
         return mItems.get(position);
     }
 
-    // PlaceItem 개별 추가 메소드 (Sample Data용)
-    public void addItems(AppServerData placeServerData){
-        mItems.add(placeServerData);
-        notifyDataSetChanged();
-    }
-
-    // PlaceList item 추가 메소드
+    // AppList item 추가 메소드
     public void setItems(List<AppServerData> items){
         mItems = items;
         notifyDataSetChanged();

@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Adapter.AppBookmarkedListAdapter;
+import com.example.androidchoi.appsearcher.Manager.MyApplication;
+import com.example.androidchoi.appsearcher.Manager.NetworkManager;
+import com.example.androidchoi.appsearcher.Model.AppList;
 import com.example.androidchoi.appsearcher.ViewHolder.AppBookmarkedItemViewHolder;
 
 
@@ -63,7 +67,22 @@ public class AppBookmarkedListFragment extends Fragment {
 
     // 즐겨찾기로 추가된 앱을 서버에서 불러오는 메소드
     public void getBookmarkedList(){
+        NetworkManager.getInstance().showAppList(new NetworkManager.OnResultListener<AppList>() {
+            @Override
+            public void onSuccess(AppList result) {
+                mAppBookmarkedListAdapter.setItems(result.getAppList());
+            }
 
+            @Override
+            public void onFail(String error) {
+                Log.i("error : ", error);
+                Toast.makeText(MyApplication.getContext(), "목록을 가져오지 못하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void refreshList(){
+        getBookmarkedList();
     }
 
 

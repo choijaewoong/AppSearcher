@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.example.androidchoi.appsearcher.Adapter.AppDefaultListCursorAdapter;
 import com.example.androidchoi.appsearcher.Model.AppData;
 import com.example.androidchoi.appsearcher.ViewHolder.AppDefualtItemViewHolder;
-import com.example.androidchoi.appsearcher.ViewHolder.AppItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +68,7 @@ public class AppAllListFragment extends Fragment{
         mAdapter = new AppDefaultListCursorAdapter(c);
 
         // item 클릭시 해당 앱 실행
-        mAdapter.setOnItemClickListener(new AppItemViewHolder.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new AppDefualtItemViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(String packageName, String activityName, int position) {
                 ((MainActivity)getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.

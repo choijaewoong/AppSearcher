@@ -17,9 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.androidchoi.appsearcher.Adapter.AppListCursorAdapter;
+import com.example.androidchoi.appsearcher.Adapter.AppDefaultListCursorAdapter;
 import com.example.androidchoi.appsearcher.Model.AppData;
-import com.example.androidchoi.appsearcher.ViewHolder.AppItemViewHolder;
+import com.example.androidchoi.appsearcher.ViewHolder.AppDefualtItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class AppWidgetFragment extends Fragment {
     private SQLiteDatabase db;
 
     RecyclerView mRecyclerView;
-    AppListCursorAdapter mAdapter;
+    AppDefaultListCursorAdapter mAdapter;
 
     public AppWidgetFragment() {
         // Required empty public constructor
@@ -59,10 +59,10 @@ public class AppWidgetFragment extends Fragment {
             initAppList();
             c = db.query(DatabaseHelper.TABLE_NAME, null, null, null, null, null, null);
         }
-        mAdapter = new AppListCursorAdapter(c);
+        mAdapter = new AppDefaultListCursorAdapter(c);
 
         // item 클릭시 해당 앱 실행
-        mAdapter.setOnItemClickListener(new AppItemViewHolder.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new AppDefualtItemViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(String packageName, String activityName, int position) {
                 ((AppWidgetActivity)getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.

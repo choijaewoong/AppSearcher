@@ -9,6 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.androidchoi.appsearcher.Model.AppServerData;
+import com.example.androidchoi.appsearcher.Model.AppServerDataLab;
 import com.example.androidchoi.appsearcher.Model.SignInData;
 import com.google.gson.Gson;
 
@@ -45,6 +47,37 @@ public class NetworkManager {
 
     private static final String SERVER = "http://52.78.29.249";
 
+    // 앱 즐겨 찾기
+    private static final String ADD_APP = SERVER + "/addapp";
+    public void addApp(final String name, final String imageURL, final String packageName, final String activityName,
+                       final OnResultListener<AppServerData> listener){
+        request.add(new StringRequest(Request.Method.POST, ADD_APP,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        AppServerDataLab appServerDataLab = gson.fromJson(response, AppServerDataLab.class);
+                        listener.onSuccess(appServerDataLab.getAppServerData());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.i("Error", volleyError.getMessage());
+                        listener.onFail(volleyError.getMessage());
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("name", name);
+                params.put("image", "");
+                params.put("package_name", packageName);
+                params.put("activity_name", activityName);
+                return params;
+            }
+        });
+    }
     //로그인
     private static final String SIGN_IN = SERVER + "/signin";
     public void signIn(final String email, final String pw, final OnResultListener<SignInData> listener){

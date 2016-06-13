@@ -25,11 +25,11 @@ public class AppDefualtItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public interface OnPopUpButtonClickListener {
-        public void onPopUpButtonClick(View view, String packageName, String activityName, int position);
+        public void onPopUpButtonClick(View view, String appName, String appImageURL, String packageName, String activityName, int position);
     }
-    OnPopUpButtonClickListener mPopUpButtonClickListenerListener;
+    OnPopUpButtonClickListener mPopUpButtonClickListener;
     public void setOnPopUpButtonClickListener(OnPopUpButtonClickListener listener) {
-        mPopUpButtonClickListenerListener = listener;
+        mPopUpButtonClickListener = listener;
     }
 
     TextView textAppName;
@@ -47,8 +47,10 @@ public class AppDefualtItemViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 int position = getAdapterPosition();
-                if (mPopUpButtonClickListenerListener != null && position != RecyclerView.NO_POSITION) {
-                    mPopUpButtonClickListenerListener.onPopUpButtonClick(v, packageName, activityName, position);
+                if (mPopUpButtonClickListener != null && position != RecyclerView.NO_POSITION) {
+                    mPopUpButtonClickListener.onPopUpButtonClick(v,
+                            textAppName.getText().toString(), "",
+                            packageName, activityName, position);
                 }
             }
         });

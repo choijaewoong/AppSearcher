@@ -93,7 +93,7 @@ public class AppAllListFragment extends Fragment{
         // popup 버튼 클릭시 popup 메뉴 생성
         mAdapter.setOnPopUpButtonClickListener(new AppDefualtItemViewHolder.OnPopUpButtonClickListener() {
             @Override
-            public void onPopUpButtonClick(View view, String packageName, String activityName, int position) {
+            public void onPopUpButtonClick(View view, String appName, String appImageURL, String packageName, String activityName, int position) {
 //                Toast.makeText(getContext(), packageName + "/" + activityName + "/ " + position, Toast.LENGTH_SHORT).show();
                 if (popup == null) {
                     popup = new CustomPopupWindow(getActivity());
@@ -102,7 +102,7 @@ public class AppAllListFragment extends Fragment{
                 if (popup.isShowing()) {
                     popup.dismiss();
                 } else {
-                    popup.setAppInfo(packageName, activityName);
+                    popup.setAppInfo(appName, appImageURL, packageName, activityName);
                     popup.showAsDropDown(view, 0, -50);
                 }
             }

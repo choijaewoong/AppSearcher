@@ -3,17 +3,24 @@
     <string name="app_search">App Search</string>
     <string name="action_search">Search</string>
 
-    <!-- menu -->
+    <!-- Sliding Menu -->
     <string name="menu_app_list">앱 리스트</string>
     <string name="menu_app_board">게시판</string>
     <string name="menu_app_setting">설정</string>
 
+    <!-- Tab Name-->
     <string name="app_all_list">전체</string>
     <string name="app_bookmarked_list">즐겨찾기</string>
     <string name="app_recommend_list">추천 앱</string>
 
     <string name="app_search_hint">앱 이름을 검색하세요</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Sign In -->
+    <string name="input_info">정보 입력</string>
+    <string name="submit_user_info">입력 완료</string>
+    <string name="user_name">이름을 입력해 주세요.</string>
+    <string name="user_email">이메일 주소를 입력해 주세요.</string>
+    <string name="user_password">비밀번호를 입력해 주세요.</string>
+    <string name="user_password_check">비밀번호를 한 번 더 입력해 주세요.</string>
+
 </resources>

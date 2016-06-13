@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorPrimary"
+             tools:context="com.example.androidchoi.appsearcher.SignInFragment">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:padding="@dimen/dimen_default"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:id="@+id/editText_login_email"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:autoText="false"
+            android:gravity="center_vertical|start"
+            android:hint="E-mail"
+            android:maxLength="40"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/font_size_default"
+            />
+
+        <EditText
+            android:id="@+id/editText_login_password"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_login_email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dimen_default"
+            android:layout_marginTop="@dimen/dimen_small_default"
+            android:gravity="center_vertical|start"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="24"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/font_size_default"/>
+
+        <Button
+            android:id="@+id/btn_sign_in"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_login_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp"
+            android:text="Log-in"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_default"/>
+
+        <TextView
+            android:id="@+id/text_login_fail_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_sign_in"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/btn_sign_in"
+                android:layout_alignStart="@+id/btn_sign_in"
+                android:layout_below="@+id/btn_sign_in"
+                android:layout_toLeftOf="@+id/textView9"
+                android:layout_toStartOf="@+id/textView9"
+                android:gravity="right"
+                android:text="처음 오셨나요?"
+                />
+
+            <TextView
+                android:id="@+id/text_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_sign_in"
+                android:layout_toLeftOf="@+id/image_google_login_button"
+                android:layout_toStartOf="@+id/image_google_login_button"
+                android:text=" 가입하기"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="2dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AppSearcher"
+        android:id="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:textSize="32dp"
+        android:textColor="@android:color/white"
+        android:padding="@dimen/dimen_default"/>
+
+</RelativeLayout>

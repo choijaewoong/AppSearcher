@@ -32,4 +32,6 @@ public class NetworkManager {
         public void onSuccess(T result);
         public void onFail(String error);
     }
+
+
 }

@@ -20,6 +20,10 @@ public class AppBookmarkedListAdapter extends RecyclerView.Adapter<AppBookmarked
     public void setOnItemClickListener(AppBookmarkedItemViewHolder.OnItemClickListener listener) {
         mItemClickListener = listener;
     }
+    AppBookmarkedItemViewHolder.OnBookmarkButtonClickListener mBookmarkButtonClickListener;
+    public void setOnBookmarkButtonClickListener(AppBookmarkedItemViewHolder.OnBookmarkButtonClickListener listener){
+        mBookmarkButtonClickListener = listener;
+    }
 
     // AppServerData get 메소드
     public AppServerData getItem(int position){
@@ -42,6 +46,7 @@ public class AppBookmarkedListAdapter extends RecyclerView.Adapter<AppBookmarked
     public void onBindViewHolder(AppBookmarkedItemViewHolder holder, int position) {
         holder.setItems(mItems.get(position));
         holder.setOnItemClickListener(mItemClickListener);
+        holder.setOnBookmarkButtonClickListener(mBookmarkButtonClickListener);
     }
 
     @Override

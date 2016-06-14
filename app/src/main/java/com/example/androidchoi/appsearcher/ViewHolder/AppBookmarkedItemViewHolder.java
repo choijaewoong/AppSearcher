@@ -21,8 +21,17 @@ public class AppBookmarkedItemViewHolder extends RecyclerView.ViewHolder {
         mListener = listener;
     }
 
+    public interface OnBookmarkButtonClickListener {
+        public void onBookmarkButtonClick(String packageName, String activityName);
+    }
+    OnBookmarkButtonClickListener mBookmarkButtonClickListener;
+    public void setOnBookmarkButtonClickListener(OnBookmarkButtonClickListener listener) {
+        mBookmarkButtonClickListener = listener;
+    }
+
     TextView textAppName;
     ImageView imageAppImage;
+    ImageView imageBookmarkButton;
     String packageName;
     String activityName;
 
@@ -30,6 +39,16 @@ public class AppBookmarkedItemViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         textAppName = (TextView)itemView.findViewById(R.id.text_app_name);
         imageAppImage = (ImageView)itemView.findViewById(R.id.image_app_logo);
+        imageBookmarkButton = (ImageView)itemView.findViewById(R.id.image_bookmark_button);
+        imageBookmarkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                if(mBookmarkButtonClickListener != null && position != RecyclerView.NO_POSITION){
+                    mBookmarkButtonClickListener.onBookmarkButtonClick(packageName, activityName);
+                }
+            }
+        });
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

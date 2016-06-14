@@ -60,6 +60,12 @@ public class AppBookmarkedListFragment extends Fragment {
                 }
             }
         });
+        mAppBookmarkedListAdapter.setOnBookmarkButtonClickListener(new AppBookmarkedItemViewHolder.OnBookmarkButtonClickListener() {
+            @Override
+            public void onBookmarkButtonClick(String packageName, String activityName) {
+                Toast.makeText(MyApplication.getContext(), "즐겨찾기를 해제합니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
         getBookmarkedList();
 
         return view;

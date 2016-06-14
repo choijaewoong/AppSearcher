@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-</RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_post_app_logo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:padding="@dimen/dimen_small_default"
+                android:src="@drawable/icon_app_default_image"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_bold_divider"
+                android:layout_marginLeft="80dp"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="@dimen/dimen_small_default"
+                android:id="@+id/imageView4"
+                android:layout_below="@+id/imageView3"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/text_post_app_name"
+                android:layout_marginLeft="@dimen/dimen_small_default"
+                android:textColor="@color/colorPostAppName"
+                android:textSize="@dimen/font_size_title"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/image_post_app_logo"
+                android:layout_marginTop="@dimen/dimen_default"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:textColor="@color/colorPrimaryDark"
+                android:id="@+id/text_post_user_name"
+                android:layout_marginTop="@dimen/dimen_small_default"
+                android:layout_marginRight="@dimen/dimen_small_default"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_size_small"
+                android:id="@+id/text_post_date"
+                android:layout_marginRight="@dimen/dimen_small_default"
+                android:layout_below="@+id/text_post_user_name"
+                android:layout_alignParentEnd="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/image_quotation_marks"
+                android:layout_below="@+id/text_post_app_name"
+                android:layout_toEndOf="@+id/image_post_app_logo"
+                android:layout_marginLeft="@dimen/dimen_default"
+                android:layout_marginTop="@dimen/dimen_small_default"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/text_post_app_evalation"
+                android:textStyle="italic"
+                android:layout_marginTop="@dimen/dimen_small_default"
+                android:layout_marginBottom="@dimen/dimen_small_default"
+                android:layout_below="@+id/imageView2"
+                android:textColor="@android:color/black"
+                android:layout_toEndOf="@+id/image_post_app_logo"
+                android:paddingLeft="@dimen/dimen_large_default"
+                android:paddingRight="@dimen/dimen_large_default"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@drawable/image_quotation_marks_end"
+                android:layout_below="@+id/text_post_app_evalation"
+                android:layout_alignEnd="@+id/text_post_app_evalation"
+                android:layout_marginRight="@dimen/dimen_default"
+                android:layout_marginBottom="@dimen/dimen_default"/>
+
+
+        </RelativeLayout>
+
+</FrameLayout>

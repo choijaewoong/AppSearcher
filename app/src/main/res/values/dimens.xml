@@ -5,6 +5,7 @@
     <dimen name="dimen_small_default">8dp</dimen>
     <dimen name="dimen_min_default">4dp</dimen>
     <dimen name="dimen_divider">0.25dp</dimen>
+    <dimen name="dimen_bold_divider">1.5dp</dimen>
 
     <dimen name="dimen_toolbar_height">48dp</dimen>
     <dimen name="dimen_toolbar_shadow">4dp</dimen>
@@ -18,7 +19,8 @@
     <dimen name="dimen_app_image_size">32dp</dimen>
     <dimen name="font_size_large">16dp</dimen>
     <dimen name="font_size_default">14dp</dimen>
-    <dimen name="font_size_small">10dp</dimen>
+    <dimen name="font_size_small">12dp</dimen>
+    <dimen name="font_size_min">10dp</dimen>
     <dimen name="font_size_title">20dp</dimen>
     <!-- sliding menu -->
     <dimen name="sliding_menu_header_size">180dp</dimen>

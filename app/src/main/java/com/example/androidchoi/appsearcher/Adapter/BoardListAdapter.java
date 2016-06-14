@@ -26,6 +26,11 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardItemViewHolder> 
         return mItems.get(position);
     }
 
+    public void addItems(PostData item){
+        mItems.add(item);
+        notifyDataSetChanged();
+    }
+
     // Post item 추가 메소드
     public void setItems(List<PostData> items){
         mItems = items;

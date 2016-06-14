@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.androidchoi.appsearcher.Adapter.BoardListAdapter;
+import com.example.androidchoi.appsearcher.Model.PostData;
 import com.github.clans.fab.FloatingActionButton;
 
 
@@ -40,6 +41,9 @@ public class BoardFragment extends Fragment {
         mRecyclerView.setAdapter(mBoardListAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
+
+        mBoardListAdapter.addItems(new PostData("카카오톡", "", "최재웅", "좋네요... \n 굿굿", "2016.06.17"));
+        mBoardListAdapter.addItems(new PostData("카카오톡", "", "최재웅", "좋네요... \n 굿굿", "2016.06.17"));
 
         // 게시글 작성 플로팅 버튼
         mFloatingActionButton = (FloatingActionButton)view.findViewById(R.id.fab_write_post);

@@ -10,4 +10,5 @@
     <color name="colorGray">#7e7e7e</color>
     <color name="colorDisable">#33000000</color>
     <color name="colorText">#808080</color>
+    <color name="colorPostAppName">#574951</color>
 </resources>

@@ -23,4 +23,7 @@
     <string name="user_password">비밀번호를 입력해 주세요.</string>
     <string name="user_password_check">비밀번호를 한 번 더 입력해 주세요.</string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

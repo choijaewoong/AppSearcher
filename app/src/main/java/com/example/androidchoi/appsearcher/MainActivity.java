@@ -3,6 +3,7 @@ package com.example.androidchoi.appsearcher;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -168,6 +169,23 @@ public class MainActivity extends SlidingFragmentActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_app_list) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_APP_LIST);
+            if (old == null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AppListContainerFragment(), TAG_APP_LIST).commit();
+            }
+        } else if (id == R.id.nav_app_board) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_APP_BOARD);
+            if (old == null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment(), TAG_APP_BOARD).commit();
+            }
+        } else if (id == R.id.nav_setting) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_SETTING);
+            if (old == null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment(), TAG_SETTING).commit();
+            }
+        }
         showContent();
         return true;
     }

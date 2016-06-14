@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Adapter.BoardListAdapter;
-import com.example.androidchoi.appsearcher.Model.PostData;
+import com.example.androidchoi.appsearcher.Manager.MyApplication;
+import com.example.androidchoi.appsearcher.Manager.NetworkManager;
+import com.example.androidchoi.appsearcher.Model.PostList;
 import com.github.clans.fab.FloatingActionButton;
 
 
@@ -42,8 +46,9 @@ public class BoardFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mBoardListAdapter.addItems(new PostData("카카오톡", "", "최재웅", "좋네요... \n 굿굿", "2016.06.17"));
-        mBoardListAdapter.addItems(new PostData("카카오톡", "", "최재웅", "좋네요... \n 굿굿", "2016.06.17"));
+        showPostList(); // 게시글 목록 불러오기
+//        mBoardListAdapter.addItems(new PostData("카카오톡", "", "최재웅", "좋네요... \n 굿굿", 20160617));
+//        mBoardListAdapter.addItems(new PostData("카카오톡", "", "최재웅", "좋네요... \n 굿굿", 20160617));
 
         // 게시글 작성 플로팅 버튼
         mFloatingActionButton = (FloatingActionButton)view.findViewById(R.id.fab_write_post);
@@ -54,6 +59,22 @@ public class BoardFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    // 게시글 요청 메소드
+    public void showPostList(){
+        NetworkManager.getInstance().showPostList(new NetworkManager.OnResultListener<PostList>() {
+            @Override
+            public void onSuccess(PostList result) {
+                mBoardListAdapter.setItems(result.getPostList());
+            }
+
+            @Override
+            public void onFail(String error) {
+                Log.i("error : ", error);
+                Toast.makeText(MyApplication.getContext(), "목록을 가져오지 못하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

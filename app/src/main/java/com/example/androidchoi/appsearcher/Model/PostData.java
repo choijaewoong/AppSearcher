@@ -1,17 +1,24 @@
 package com.example.androidchoi.appsearcher.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Choi on 2016-06-14.
  */
 public class PostData {
 
-    String appName;
-    String appImageURL;
-    String userName;
-    String evaluation;
-    String writeDate;
+    @SerializedName("app_name")
+    private String appName;
+    @SerializedName("app_image")
+    private String appImageURL;
+    @SerializedName("user_name")
+    private String userName;
+    @SerializedName("app_evaluation")
+    private String evaluation;
+    @SerializedName("write_date")
+    private long writeDate;
 
-    public PostData(String appName, String appImageURL, String userName, String evaluation, String writeDate) {
+    public PostData(String appName, String appImageURL, String userName, String evaluation, long writeDate) {
         this.appName = appName;
         this.appImageURL = appImageURL;
         this.userName = userName;
@@ -35,7 +42,7 @@ public class PostData {
         return evaluation;
     }
 
-    public String getWriteDate() {
+    public long getWriteDate() {
         return writeDate;
     }
 }

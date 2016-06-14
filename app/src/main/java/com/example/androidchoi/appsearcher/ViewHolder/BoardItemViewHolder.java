@@ -39,6 +39,6 @@ public class BoardItemViewHolder extends RecyclerView.ViewHolder {
         mTextAppName.setText(postData.getAppName());
         mTextUserName.setText(postData.getUserName());
         mTextAppEvaluation.setText(postData.getEvaluation());
-        mTextWriteDate.setText(postData.getWriteDate());
+        mTextWriteDate.setText(postData.getWriteDate()+"");
     }
 }

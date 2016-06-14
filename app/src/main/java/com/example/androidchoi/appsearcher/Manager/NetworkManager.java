@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.androidchoi.appsearcher.Model.AppList;
 import com.example.androidchoi.appsearcher.Model.AppServerData;
 import com.example.androidchoi.appsearcher.Model.AppServerDataLab;
+import com.example.androidchoi.appsearcher.Model.PostList;
 import com.example.androidchoi.appsearcher.Model.SignInData;
 import com.google.gson.Gson;
 
@@ -55,7 +56,6 @@ public class NetworkManager {
                 new Response.Listener<String>(){
                     @Override
                     public void onResponse(String s) {
-                        Log.i("asdfasf", s);
                         AppList appList = gson.fromJson(s, AppList.class);
                         listener.onSuccess(appList);
                     }
@@ -99,6 +99,26 @@ public class NetworkManager {
             }
         });
     }
+
+    // 게시글 목록 가져오기
+    private static final String SHOW_POST_LIST = SERVER + "/postlist";
+    public void showPostList(final OnResultListener<PostList> listener){
+        request.add(new StringRequest(Request.Method.GET, SHOW_POST_LIST,
+                        new Response.Listener<String>(){
+                            @Override
+                            public void onResponse(String s) {
+                                PostList postList = gson.fromJson(s, PostList.class);
+                                listener.onSuccess(postList);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        listener.onFail(volleyError.getMessage());
+                    }
+                })
+        );
+    }
+
     //로그인
     private static final String SIGN_IN = SERVER + "/signin";
     public void signIn(final String email, final String pw, final OnResultListener<SignInData> listener){

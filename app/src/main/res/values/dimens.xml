@@ -5,7 +5,7 @@
     <dimen name="dimen_small_default">8dp</dimen>
     <dimen name="dimen_min_default">4dp</dimen>
     <dimen name="dimen_divider">0.25dp</dimen>
-    <dimen name="dimen_bold_divider">1.5dp</dimen>
+    <dimen name="dimen_bold_divider">1.2dp</dimen>
 
     <dimen name="dimen_toolbar_height">48dp</dimen>
     <dimen name="dimen_toolbar_shadow">4dp</dimen>

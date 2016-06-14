@@ -20,6 +20,7 @@
             android:id="@+id/text_user_name"
             android:textSize="@dimen/font_size_title"
             android:textColor="@color/colorGray"
+            android:layout_marginTop="@dimen/dimen_min_default"
             android:layout_below="@+id/image_user_profile"
             android:layout_centerHorizontal="true"/>
 

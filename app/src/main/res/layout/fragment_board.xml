@@ -6,6 +6,13 @@
              android:background="@color/colorBackground"
              tools:context="com.example.androidchoi.appsearcher.BoardFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recylerView_board_list"
+        android:padding="@dimen/dimen_small_default"
+        android:clipToPadding="false"/>
+
     <View
         android:id="@+id/toolbar_shadow"
         android:layout_width="match_parent"

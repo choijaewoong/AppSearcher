@@ -34,4 +34,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     // 슬라이딩 메뉴
     compile project(':slidingmenu')
+    // Floating Button
+    compile 'com.github.clans:fab:1.6.3'
 }

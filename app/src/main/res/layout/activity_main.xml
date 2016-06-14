@@ -17,19 +17,19 @@
         <!--android:id="@+id/toolbar_container">-->
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_margin="@dimen/dimen_small_default"
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_toolbar_height"
             android:layout_alignParentTop="true"
             android:elevation="@dimen/dimen_min_default"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            android:layout_margin="@dimen/dimen_small_default"/>
     <!--<include layout="@layout/content_main"/>-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/container"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_below="@+id/toolbar">
     </FrameLayout>
 
 </RelativeLayout>

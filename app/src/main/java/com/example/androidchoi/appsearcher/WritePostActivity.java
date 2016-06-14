@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -13,6 +14,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import com.example.androidchoi.appsearcher.Manager.MyApplication;
+import com.example.androidchoi.appsearcher.Manager.NetworkManager;
+import com.example.androidchoi.appsearcher.Model.PostData;
+
+import java.util.Calendar;
 
 public class WritePostActivity extends AppCompatActivity {
 
@@ -69,6 +77,23 @@ public class WritePostActivity extends AppCompatActivity {
 
     // 게시글 저장 요청 메소드
     public void writePost(){
+        String appName = mEditTextTitle.getText().toString();
+        String appEvaluation = mEditTextContent.getText().toString();
+        long currentTimeStamp = Calendar.getInstance().getTimeInMillis();
+        NetworkManager.getInstance().writePost(appName, "", appEvaluation, currentTimeStamp,
+                new NetworkManager.OnResultListener<PostData>() {
+            @Override
+            public void onSuccess(PostData result) {
+                setResult(RESULT_OK);
+                finish();
+                Toast.makeText(MyApplication.getContext(), "게시글이 작성 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFail(String error) {
+                Log.i("error : ", error);
+                Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -83,6 +108,7 @@ public class WritePostActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_save) {
             // 게시글 저장 요청
+            writePost();
             return true;
         }
         return super.onOptionsItemSelected(item);

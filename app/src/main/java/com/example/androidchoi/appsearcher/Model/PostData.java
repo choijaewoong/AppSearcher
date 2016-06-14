@@ -16,9 +16,9 @@ public class PostData {
     @SerializedName("app_evaluation")
     private String evaluation;
     @SerializedName("write_date")
-    private long writeDate;
+    private String writeDate;
 
-    public PostData(String appName, String appImageURL, String userName, String evaluation, long writeDate) {
+    public PostData(String appName, String appImageURL, String userName, String evaluation, String writeDate) {
         this.appName = appName;
         this.appImageURL = appImageURL;
         this.userName = userName;
@@ -42,7 +42,7 @@ public class PostData {
         return evaluation;
     }
 
-    public long getWriteDate() {
+    public String getWriteDate() {
         return writeDate;
     }
 }

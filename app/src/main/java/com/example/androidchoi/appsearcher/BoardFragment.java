@@ -1,6 +1,7 @@
 package com.example.androidchoi.appsearcher;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ import com.github.clans.fab.FloatingActionButton;
  * A simple {@link Fragment} subclass.
  */
 public class BoardFragment extends Fragment {
+    private static final int REQUEST_WRITE_POST = 1;
 
     RecyclerView mRecyclerView;
     BoardListAdapter mBoardListAdapter;
@@ -33,6 +35,17 @@ public class BoardFragment extends Fragment {
     public BoardFragment() {
         // Required empty public constructor
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_WRITE_POST) {
+            showPostList();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,7 +71,7 @@ public class BoardFragment extends Fragment {
             public void onClick(View v) {
                 // 작성화면으로 이동
                 Intent intent = new Intent(getActivity(), WritePostActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_WRITE_POST);
             }
         });
         return view;

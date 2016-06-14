@@ -1,6 +1,7 @@
 package com.example.androidchoi.appsearcher;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,6 +57,8 @@ public class BoardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // 작성화면으로 이동
+                Intent intent = new Intent(getActivity(), WritePostActivity.class);
+                startActivity(intent);
             }
         });
         return view;

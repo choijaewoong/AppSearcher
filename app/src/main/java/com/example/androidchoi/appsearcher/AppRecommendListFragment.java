@@ -3,16 +3,22 @@ package com.example.androidchoi.appsearcher;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.androidchoi.appsearcher.Adapter.AppRecommendListAdapter;
+import com.example.androidchoi.appsearcher.Manager.MyApplication;
+import com.example.androidchoi.appsearcher.Manager.NetworkManager;
+import com.example.androidchoi.appsearcher.Model.RecommendData;
+import com.example.androidchoi.appsearcher.Model.RecommendList;
 import com.example.androidchoi.appsearcher.ViewHolder.AppRecommendItemViewHolder;
 
 
@@ -41,28 +47,41 @@ public class AppRecommendListFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
 
+        mAppRecommendListAdapter.addItems(new RecommendData("추천asdfasdfasdfasd!", "밍ㅇ민ㅇ라민알\n\n\nasdfasdfasdf", "", ""));
+
         mAppRecommendListAdapter.setOnItemClickListener(new AppRecommendItemViewHolder.OnItemClickListener() {
             @Override
-            public void onItemClick(String packageName, String activityName, int position) {
-                ((MainActivity) getActivity()).closeSearchView(); // 앱 클릭 시 SearchView 닫음.
+            public void onItemClick(String downloadURL, int position) {
                 try {
-                    //해당 App의 PackageName, activityName을 이용해 App 실행
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.setClassName(packageName, activityName);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    Uri uriUrl = Uri.parse(downloadURL);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    getContext().startActivity(intent);
                 } catch (ActivityNotFoundException e) {
-                    Toast.makeText(getActivity(), "존재하지 않는 Application 입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "페이지를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+                } catch (NullPointerException e){
+                    Toast.makeText(getContext(), "페이지를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        getBookmarkedList();
+        getRecommendList();
 
         return view;
     }
 
-    // 즐겨찾기로 추가된 앱을 서버에서 불러오는 메소드
-    public void getBookmarkedList(){
+    // 추천 앱을 서버에서 불러오는 메소드
+    public void getRecommendList(){
+        NetworkManager.getInstance().showRecommendList(new NetworkManager.OnResultListener<RecommendList>() {
+            @Override
+            public void onSuccess(RecommendList result) {
+                mAppRecommendListAdapter.setItems(result.getRecommendDataList());
+            }
+
+            @Override
+            public void onFail(String error) {
+                Log.i("error : ", error);
+                Toast.makeText(MyApplication.getContext(), "목록을 가져오지 못하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

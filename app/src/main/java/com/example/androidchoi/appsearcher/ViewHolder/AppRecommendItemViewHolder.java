@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.androidchoi.appsearcher.Model.AppServerData;
+import com.example.androidchoi.appsearcher.Model.RecommendData;
 import com.example.androidchoi.appsearcher.R;
 
 /**
@@ -14,7 +14,7 @@ import com.example.androidchoi.appsearcher.R;
 public class AppRecommendItemViewHolder extends RecyclerView.ViewHolder {
 
     public interface OnItemClickListener {
-        public void onItemClick(String packageName, String activityName, int position);
+        public void onItemClick(String downloadURL, int position);
     }
     OnItemClickListener mListener;
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -22,26 +22,29 @@ public class AppRecommendItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     TextView textAppName;
+    TextView textAppDescription;
     ImageView imageAppImage;
-    String packageName;
-    String activityName;
+    String mAppDownloadURL;
 
     public AppRecommendItemViewHolder(View itemView) {
         super(itemView);
         textAppName = (TextView)itemView.findViewById(R.id.text_app_name);
+        textAppDescription = (TextView)itemView.findViewById(R.id.text_app_description);
         imageAppImage = (ImageView)itemView.findViewById(R.id.image_app_logo);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 if (mListener != null && position != RecyclerView.NO_POSITION) {
-                    mListener.onItemClick(packageName, activityName, position);
+                    mListener.onItemClick(mAppDownloadURL, position);
                 }
             }
         });
     }
 
-    public void setItems(AppServerData serverData){
-
+    public void setItems(RecommendData recommendData){
+        textAppName.setText(recommendData.getAppName());
+        textAppDescription.setText(recommendData.getAppDescription().toString());
+        mAppDownloadURL = recommendData.getAppDownloadURL();
     }
 }

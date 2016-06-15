@@ -15,6 +15,7 @@ import com.example.androidchoi.appsearcher.Model.AppServerData;
 import com.example.androidchoi.appsearcher.Model.AppServerDataLab;
 import com.example.androidchoi.appsearcher.Model.PostData;
 import com.example.androidchoi.appsearcher.Model.PostList;
+import com.example.androidchoi.appsearcher.Model.RecommendList;
 import com.example.androidchoi.appsearcher.Model.SignInData;
 import com.google.gson.Gson;
 
@@ -111,6 +112,25 @@ public class NetworkManager {
                             public void onResponse(String s) {
                                 PostList postList = gson.fromJson(s, PostList.class);
                                 listener.onSuccess(postList);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        listener.onFail(volleyError.getMessage());
+                    }
+                })
+        );
+    }
+
+    // 추천 목록 가져오기
+    private static final String SHOW_RECOMMEND_LIST = SERVER + "/recommendlist";
+    public void showRecommendList(final OnResultListener<RecommendList> listener){
+        request.add(new StringRequest(Request.Method.GET, SHOW_RECOMMEND_LIST,
+                        new Response.Listener<String>(){
+                            @Override
+                            public void onResponse(String s) {
+                                RecommendList recommendList = gson.fromJson(s, RecommendList.class);
+                                listener.onSuccess(recommendList);
                             }
                         }, new Response.ErrorListener() {
                     @Override

@@ -1,14 +1,199 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="@color/colorBackground"
+              android:orientation="vertical"
              tools:context="com.example.androidchoi.appsearcher.SettingFragment">
-
     <View
         android:id="@+id/toolbar_shadow"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_toolbar_shadow"
+        android:layout_height="@dimen/dimen_min_default"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
+        android:layout_gravity="center"
         android:background="@drawable/shadow_bottom"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:id="@+id/textView17"
+        android:layout_marginLeft="@dimen/dimen_default"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_small"/>
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_divider"
+    android:background="@color/colorGray"
+    android:layout_below="@+id/toolbar_shadow"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그인 정보"
+            android:id="@+id/textView20"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/dimen_default"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_setting_user_email"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginRight="@dimen/dimen_default"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_divider"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/dimen_default"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_sign_out"
+            android:text="로그아웃"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginRight="@dimen/dimen_default"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_divider"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="버전정보"
+        android:id="@+id/textView19"
+        android:layout_marginLeft="@dimen/dimen_default"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_small"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_divider"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재 버전"
+            android:id="@+id/textView23"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/dimen_default"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.0"
+            android:id="@+id/text_current_version"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@android:color/black"
+            android:layout_marginRight="@dimen/dimen_default"
+            android:textSize="@dimen/font_size_large"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_divider"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최신 버전"
+            android:id="@+id/textView24"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/dimen_default"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.0"
+            android:id="@+id/text_new_version"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginRight="@dimen/dimen_default"
+            android:textSize="@dimen/font_size_large"
+            android:textIsSelectable="true"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_divider"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+</LinearLayout>

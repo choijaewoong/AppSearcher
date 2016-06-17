@@ -20,7 +20,7 @@ import android.widget.EditText;
 
 public class AppWidgetActivity extends AppCompatActivity {
     private MenuItem mSearchMenu;
-    private boolean mIsSearchOpened = false;
+    private boolean mIsSearchOpened = true;
     private View mSearchView;
     private EditText mEditTextSearch;
 
@@ -51,11 +51,14 @@ public class AppWidgetActivity extends AppCompatActivity {
                     .add(R.id.fragmentContainer, fragment)
                     .commit();
         }
+
+
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         mSearchMenu = menu.findItem(R.id.action_search);
+        openSearchView();
         return super.onPrepareOptionsMenu(menu);
     }
 

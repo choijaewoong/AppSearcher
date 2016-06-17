@@ -27,7 +27,8 @@
         </activity>
         <activity
             android:name=".AppWidgetActivity"
-            android:theme="@style/AppListTheme" >
+            android:theme="@style/AppListTheme"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name=".SplashActivity" >
             <intent-filter>
@@ -36,7 +37,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignInActivity" >
+        <activity android:name=".SignInActivity"
+                  android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name=".WritePostActivity"
                   android:windowSoftInputMode="adjustResize">

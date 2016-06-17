@@ -10,8 +10,10 @@
         android:elevation="@dimen/dimen_min_default"
         android:layout_width="@dimen/sliding_menu_header_size"
         android:layout_height="@dimen/sliding_menu_header_size"
-        android:padding="@dimen/dimen_default"
-        android:layout_gravity="center_horizontal|top">
+        android:layout_gravity="center_horizontal|top"
+        android:paddingTop="@dimen/dimen_default"
+        android:paddingLeft="@dimen/dimen_default"
+        android:paddingRight="@dimen/dimen_default">
 
         <TextView
             android:layout_width="wrap_content"

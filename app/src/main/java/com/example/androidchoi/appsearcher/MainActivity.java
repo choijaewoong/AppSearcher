@@ -178,9 +178,11 @@ public class MainActivity extends SlidingFragmentActivity
         } else if (id == R.id.nav_app_board) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_APP_BOARD);
             if (old == null) {
+                closeSearchView();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment(), TAG_APP_BOARD).commit();
             }
         } else if (id == R.id.nav_setting) {
+            closeSearchView();
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_SETTING);
             if (old == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment(), TAG_SETTING).commit();

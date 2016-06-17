@@ -207,4 +207,22 @@ public class NetworkManager {
             }
         });
     }
+
+    // 로그 아웃
+    private static final String SIGN_OUT = SERVER + "/signout";
+    public void signout(final OnResultListener<String> listener){
+        request.add(new StringRequest(Request.Method.GET, SIGN_OUT,
+                        new Response.Listener<String>(){
+                            @Override
+                            public void onResponse(String s) {
+                                listener.onSuccess("success");
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        listener.onFail(volleyError.getMessage());
+                    }
+                })
+        );
+    }
 }
